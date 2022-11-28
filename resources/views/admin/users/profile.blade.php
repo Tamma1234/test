@@ -98,7 +98,7 @@
                                                     <div class="kt-radio-inline">
                                                         @foreach($information as $item)
                                                         <label class="kt-radio">
-                                                            <input type="radio" {{ $item->id == $user->hasInformation->id ? 'checked' : '' }} name="information_id" value="{{ $item->id }}"> {{ $item->name }}
+                                                            <input type="radio" {{ $item->id == $user->hasInformation->id ? 'checked' : 0 }} name="information_id" value="{{ $item->id }}"> {{ $item->name }}
                                                             <span></span>
                                                         </label>
                                                         @endforeach
@@ -112,7 +112,7 @@
                                                     <div class="kt-radio-inline">
                                                         @foreach($business as $item)
                                                             <label class="kt-radio">
-                                                                <input type="radio" {{ $item->id == $user->hasBusiness->id ? 'checked' : '' }} name="business_id" value="{{ $item->id }}"> {{ $item->name }}
+                                                                <input type="radio" {{ $item->id == $user->hasBusiness->id ? 'checked' : 0 }} name="business_id" value="{{ $item->id }}"> {{ $item->name }}
                                                                 <span></span>
                                                             </label>
                                                         @endforeach
@@ -126,7 +126,7 @@
                                                     <div class="kt-radio-inline">
                                                         @foreach($media as $item)
                                                             <label class="kt-radio">
-                                                                <input type="radio" {{ $item->id == $user->hasMedia->id ? 'checked' : '' }} name="media_id" value="{{ $item->id }}"> {{ $item->name }}
+                                                                <input type="radio" {{ $item->id == $user->hasMedia->id ? 'checked' : 0 }} name="media_id" value="{{ $item->id }}"> {{ $item->name }}
                                                                 <span></span>
                                                             </label>
                                                         @endforeach
