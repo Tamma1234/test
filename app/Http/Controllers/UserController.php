@@ -22,8 +22,9 @@ class UserController extends Controller
 
     public function updateProfile(Request $request) {
         $data = $request->all();
+
         $id = $request->id;
-        $user = User::find($id)->first();
+        $user = User::where('id', $id)->first();
         $user->update($data);
 
         return back()->with('success', 'Update Account successful');

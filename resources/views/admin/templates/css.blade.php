@@ -56,7 +56,7 @@
         color: white;
     }
 
-    .form-group row .col-form-label{
+    .form-group row .btn-label{
         font-weight: 700;
     }
 </style>
