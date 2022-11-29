@@ -26,6 +26,10 @@
                                     <div class="kt-section kt-section--first">
                                         <div class="kt-section__body">
                                             <div class="form-group row">
+                                                {!! QrCode::size(200)->generate('https://techvblogs.com/blog/generate-qr-code-laravel-8') !!}
+                                            </div>
+                                            <div></div>
+                                            <div class="form-group row">
                                                 <label class="col-xl-3 col-lg-3 col-form-label">Họ và tên:</label>
                                                 <div class="col-lg-9 col-xl-6">
                                                     <input class="form-control" type="text"
@@ -90,7 +94,7 @@
                                             {{--                                                </div>--}}
                                             {{--                                            </div>--}}
                                             <div class="form-group row">
-                                                <label class="col-form-label text-left">1. Các ngành học hiện nay
+                                                <label class="col-form-label btn-label text-left">1. Các ngành học hiện nay
                                                     ở Swinburne Việt Nam, bạn quan tâm đến ngành nào:</label>
                                             </div>
                                             <div class="form-group row">
@@ -125,13 +129,13 @@
                                                             @if($user->hasBusiness != null)
                                                                 <label class="kt-radio">
                                                                     <input type="radio"
-                                                                           {{ $item->id == $user->hasBusiness->id ? 'checked' : 0 }} name="business_id"
+                                                                           {{ $item->id == $user->hasInformation->id ? 'checked' : 0 }} name="information_id"
                                                                            value="{{ $item->id }}"> {{ $item->name }}
                                                                     <span></span>
                                                                 </label>
                                                             @else
                                                                 <label class="kt-radio">
-                                                                    <input type="radio" name="business_id"
+                                                                    <input type="radio" name="information_id"
                                                                            value="{{ $item->id }}"> {{ $item->name }}
                                                                     <span></span>
                                                                 </label>
@@ -150,13 +154,13 @@
                                                             @if($user->hasMedia != null)
                                                                 <label class="kt-radio">
                                                                     <input type="radio"
-                                                                           {{ $item->id == $user->hasMedia->id ? 'checked' : 0 }} name="media_id"
+                                                                           {{ $item->id == $user->hasInformation->id ? 'checked' : 0 }} name="information_id"
                                                                            value="{{ $item->id }}"> {{ $item->name }}
                                                                     <span></span>
                                                                 </label>
                                                             @else
                                                                 <label class="kt-radio">
-                                                                    <input type="radio" name="media_id"
+                                                                    <input type="radio" name="information_id"
                                                                            value="{{ $item->id }}"> {{ $item->name }}
                                                                     <span></span>
                                                                 </label>
@@ -166,7 +170,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-form-label text-left">2. Kế hoạch
+                                                <label class="col-form-label btn-label text-left">2. Kế hoạch
                                                     sau khi thi
                                                     THPT Quốc gia của bạn:</label>
                                                 <div class="col-lg-9 col-xl-6">
@@ -199,7 +203,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-form-label text-left">3. Tham gia ký
+                                                <label class="col-form-label btn-label text-left">3. Tham gia ký
                                                     chuyển tiếp
                                                     quốc tế với Swinburne Australia:</label>
                                                 <div class="col-lg-9 col-xl-6">
@@ -220,7 +224,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-form-label text-left">4. Trình độ
+                                                <label class="col-form-label btn-label text-left">4. Trình độ
                                                     tiếng Anh của
                                                     bạn hiện nay:</label>
                                                 <div class="col-lg-9 col-xl-6">
@@ -247,29 +251,29 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-form-label text-left">Chứng chỉ quốc
+                                                <label class="col-form-label btn-label text-left">Chứng chỉ quốc
                                                     tế
                                                     IELTS/TOEFL/PTE thi gần nhất đạt:</label>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-xl-2 col-lg-2 col-form-label">IELTS:</label>
+                                                <label class="col-xl-1 col-lg-2 col-form-label">IELTS:</label>
                                                 <div class="col-lg-2 col-xl-2">
                                                     <input class="form-control" type="text" name="ielts"
                                                            value="{{ $user->ielts }}">
                                                 </div>
-                                                <label class="col-xl-2 col-lg-2 col-form-label">TOEFL:</label>
+                                                <label class="col-xl-1 col-lg-2 col-form-label">TOEFL:</label>
                                                 <div class="col-lg-2 col-xl-2">
                                                     <input class="form-control" type="text" name="toefl"
                                                            value="{{ $user->toefl }}">
                                                 </div>
-                                                <label class="col-xl-2 col-lg-2 col-form-label">Khác:</label>
+                                                <label class="col-xl-1 col-lg-2 col-form-label">Khác:</label>
                                                 <div class="col-lg-2 col-xl-2">
                                                     <input class="form-control" type="text" name="certificate"
                                                            value="{{ $user->certificate }}">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-form-label text-left"> 5. Bạn có
+                                                <label class="col-form-label btn-label text-left"> 5. Bạn có
                                                     thích được tham
                                                     gia hoạt động sinh viên, thực tế tại doanh nghiệp và môi trường trải
                                                     nghiệm quốc tế không ?</label>

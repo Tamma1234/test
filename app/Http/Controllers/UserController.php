@@ -13,16 +13,15 @@ class UserController extends Controller
 {
     public function profileDetail() {
         $user = auth()->user();
-        $business = Business::all();
-        $media = Media::all();
-        $information = Information::all();
+        $business = Information::where('is_active', 2)->get();
+        $media = Information::where('is_active', 3)->get();
+        $information = Information::where('is_active', 1)->get();
 
         return view('admin.users.profile', compact('user', 'business', 'media', 'information'));
     }
 
     public function updateProfile(Request $request) {
         $data = $request->all();
-
         $id = $request->id;
         $user = User::where('id', $id)->first();
         $user->update($data);

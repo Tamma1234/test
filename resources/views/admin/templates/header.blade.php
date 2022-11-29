@@ -1,4 +1,7 @@
-
+<?php
+    $array = str_split($user->full_name);
+    dd($array);
+?>
 <div id="kt_header" class="kt-header kt-grid__item  kt-header--fixed ">
     <!-- begin:: Header Menu -->
 
@@ -85,7 +88,7 @@
             <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="0px,0px">
                 <div class="kt-header__topbar-user">
                     <span class="kt-header__topbar-welcome kt-hidden-mobile">Hi,</span>
-                    <span class="kt-header__topbar-username kt-hidden-mobile">Sean</span>
+                    <span class="kt-header__topbar-username kt-hidden-mobile">{{ $user->full_name }}</span>
                     <img class="kt-hidden" alt="Pic" src="assets/media/users/300_25.jpg" />
 
                     <!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
@@ -105,9 +108,7 @@
                     <div class="kt-user-card__name">
                         Sean Stone
                     </div>
-                    <div class="kt-user-card__badge">
-                        <span class="btn btn-success btn-sm btn-bold btn-font-md">23 messages</span>
-                    </div>
+
                 </div>
 
                 <!--end: Head -->
@@ -116,7 +117,6 @@
                 <div class="kt-notification">
                     <div class="kt-notification__custom kt-space-between">
                         <a href="{{route('logout.index')}}" target="_blank" class="btn btn-label btn-label-brand btn-sm btn-bold">Sign Out</a>
-                        <a href="custom/user/login-v2.html" target="_blank" class="btn btn-clean btn-sm btn-bold">Upgrade Plan</a>
                     </div>
                 </div>
 

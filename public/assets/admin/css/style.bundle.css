@@ -10767,6 +10767,12 @@ code {
   .form-group label {
     font-size: 1rem;
     font-weight: 400; }
+.form-group label.btn-label {
+    font-weight: 700;
+    border-bottom: 1px solid;
+    font-size: 1.1rem;
+}
+
   .form-group .invalid-feedback,
   .form-group .valid-feedback {
     font-weight: 400; }

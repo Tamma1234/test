@@ -46,7 +46,7 @@ class HomeController extends Controller
 
         Service::getSendMail()->sendPaymentMail($email, $full_name, $phone_number, $password);
 
-        return view('admin.auth.alert');
+        return redirect()->route('home')->with('success', 'Please check your email to activate your registered account');
     }
 
     public function confirm(Request $request) {
