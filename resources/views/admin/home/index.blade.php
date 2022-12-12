@@ -30,7 +30,7 @@
                             <form class="kt-form" action="{{ route('login') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
-                                    <input class="form-control" type="text" placeholder="Username" name="email" autocomplete="off">
+                                    <input class="form-control" type="text" placeholder="Username" name="email" autocomplete="on">
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control form-control-last" type="Password" placeholder="Password" name="password">
@@ -47,7 +47,7 @@
                                     </div>
                                 </div>
                                 <div class="kt-login__actions">
-                                    <button type="submit" id="" class="btn btn-brand btn-pill btn-elevate">Sign In</button>
+                                    <button type="submit"  class="btn btn-brand btn-pill btn-elevate">Sign In</button>
                                 </div>
                             </form>
                         </div>

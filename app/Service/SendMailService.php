@@ -9,7 +9,7 @@ class SendMailService
     public function sendPaymentMail($email, $full_name, $phone_number, $password)
     {
         Mail::send('admin.auth.send-mail', [
-           'email' => $email,
+            'email' => $email,
             'full_name' => $full_name,
             'phone_number' => $phone_number,
             'password' => $password

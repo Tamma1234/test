@@ -3,11 +3,46 @@
 
 @section('content')
     @include('admin.templates.content-header', ['name' => 'Swinburne', 'key' => 'Queries', 'value' => "", 'value2' => ""])
-    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid" >
         <!--Begin::App-->
         <div class="kt-grid kt-grid--desktop kt-grid--ver kt-grid--ver-desktop kt-app">
             <!--Begin:: App Aside Mobile Toggle-->
             <!--End:: App Aside-->
+            <div class="kt-grid__item kt-app__toggle kt-app__aside" id="kt_user_profile_aside">
+
+                <!--Begin::Portlet-->
+                <div class="kt-portlet kt-portlet--height-fluid-">
+                    <div class="kt-portlet__head kt-portlet__head--noborder">
+                        <div class="kt-portlet__head-label">
+                            <h3 class="kt-portlet__head-title">
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="kt-portlet__body">
+                        <!--begin::Widget -->
+                        <div class="kt-widget kt-widget--user-profile-2">
+                            <div class="kt-widget__head">
+                                <div class="kt-widget__media">
+                                    {!! QrCode::format('svg')->merge('qr-code/'.$user->path , 0.3, true)->size(200)->generate(route('profile.detail', ['hash' => $user->hash_id])); !!}
+                                    <div class="kt-section kt-section--last" style="padding: 20px; text-align: center">
+                                        <a href="{{ route('profile.download', ['file' => $user->path]) }}" class="btn btn-info" target="_blank" download="{{ $user->path }}">Download</a>
+                                    </div>
+                                </div>
+                                <div class="kt-widget__info">
+                                    <a href="#" class="kt-widget__username">
+                                        QR Code
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--End::Portlet-->
+
+                <!--Begin:: Portlet-->
+                <!--End:: Portlet-->
+            </div>
             <div class="kt-grid__item kt-grid__item--fluid kt-app__content">
                 <div class="row">
                     <div class="col-xl-12">
@@ -25,15 +60,15 @@
                                 <div class="kt-portlet__body">
                                     <div class="kt-section kt-section--first">
                                         <div class="kt-section__body">
-                                            <div class="form-group row">
-                                                {!! QrCode::size(200)->generate('https://techvblogs.com/blog/generate-qr-code-laravel-8') !!}
-                                            </div>
                                             <div></div>
                                             <div class="form-group row">
                                                 <label class="col-xl-3 col-lg-3 col-form-label">Họ và tên:</label>
                                                 <div class="col-lg-9 col-xl-6">
                                                     <input class="form-control" type="text"
                                                            value="{{ $user->full_name }}" name="full_name">
+                                                </div>
+                                                <div class="col-lg-9 col-xl-3">
+                                                    <span id="sophut"></span> : <span id="sogiay"></span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -102,22 +137,21 @@
                                                 <div class="col-9">
                                                     <div class="kt-radio-inline">
                                                         @foreach($information as $item)
-                                                            @if($user->hasInformation != null)
+                                                            @if($user->hasBranch != null)
                                                                 <label class="kt-radio">
                                                                     <input type="radio"
-                                                                           {{ $item->id == $user->hasInformation->id ? 'checked' : 0 }} name="information_id"
-                                                                           value="{{ $item->id }}"> {{ $item->name }}
+                                                                           {{ $item->id == $user->hasBranch->id ? 'checked' : 0 }} name="branch_id"
+                                                                           value="{{ $item->id }}"> {{ $item->industry_name }}
                                                                     <span></span>
                                                                 </label>
                                                             @else
                                                                 <label class="kt-radio">
-                                                                    <input type="radio" name="information_id"
-                                                                           value="{{ $item->id }}"> {{ $item->name }}
+                                                                    <input type="radio" name="branch_id"
+                                                                           value="{{ $item->id }}"> {{ $item->industry_name }}
                                                                     <span></span>
                                                                 </label>
                                                             @endif
                                                         @endforeach
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -126,22 +160,21 @@
                                                 <div class="col-9">
                                                     <div class="kt-radio-inline">
                                                         @foreach($business as $item)
-                                                            @if($user->hasBusiness != null)
+                                                            @if($user->hasBranch != null)
                                                                 <label class="kt-radio">
                                                                     <input type="radio"
-                                                                           {{ $item->id == $user->hasInformation->id ? 'checked' : 0 }} name="information_id"
-                                                                           value="{{ $item->id }}"> {{ $item->name }}
+                                                                           {{ $item->id == $user->hasBranch->id ? 'checked' : 0 }} name="branch_id"
+                                                                           value="{{ $item->id }}"> {{ $item->industry_name }}
                                                                     <span></span>
                                                                 </label>
                                                             @else
                                                                 <label class="kt-radio">
-                                                                    <input type="radio" name="information_id"
-                                                                           value="{{ $item->id }}"> {{ $item->name }}
+                                                                    <input type="radio" name="branch_id"
+                                                                           value="{{ $item->id }}"> {{ $item->industry_name }}
                                                                     <span></span>
                                                                 </label>
                                                             @endif
                                                         @endforeach
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -151,17 +184,17 @@
                                                 <div class="col-9">
                                                     <div class="kt-radio-inline">
                                                         @foreach($media as $item)
-                                                            @if($user->hasMedia != null)
+                                                            @if($user->hasBranch != null)
                                                                 <label class="kt-radio">
                                                                     <input type="radio"
-                                                                           {{ $item->id == $user->hasInformation->id ? 'checked' : 0 }} name="information_id"
-                                                                           value="{{ $item->id }}"> {{ $item->name }}
+                                                                           {{ $item->id == $user->hasBranch->id ? 'checked' : 0 }} name="branch_id"
+                                                                           value="{{ $item->id }}"> {{ $item->industry_name }}
                                                                     <span></span>
                                                                 </label>
                                                             @else
                                                                 <label class="kt-radio">
-                                                                    <input type="radio" name="information_id"
-                                                                           value="{{ $item->id }}"> {{ $item->name }}
+                                                                    <input type="radio" name="branch_id"
+                                                                           value="{{ $item->id }}"> {{ $item->industry_name }}
                                                                     <span></span>
                                                                 </label>
                                                             @endif
@@ -345,6 +378,7 @@
                                 </div>
                             </form>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -354,7 +388,7 @@
 
         <!--End::App-->
     </div>
-@endsection
 
+@endsection
 
 

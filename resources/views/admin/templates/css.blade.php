@@ -37,6 +37,7 @@
 <link href="{{asset('assets/admin/plugins/general/@fortawesome/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('assets/admin/css/pages/login/login-5.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('assets/admin/css/pages/login/login-6.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{asset('assets/admin/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
 
 <style>
     .custom-checkbox {
@@ -59,6 +60,17 @@
     .form-group row .btn-label{
         font-weight: 700;
     }
+
+    #clo_vn_time{
+        font-weight:bold;
+        text-align:center;
+        font-size:20px;
+        padding:10px;
+        color:#382ff8;
+        box-shadow:inset 0 0 1px rgba(0,0,0,.08), 0 0 5px rgba(255, 165, 0, 0.5);
+    }
+
+
 </style>
 
 <style>
@@ -78,7 +90,6 @@
 </style>
 
 <!--end:: Vendor Plugins -->
-<link href="{{asset('assets/admin/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
 
 <!--begin:: Vendor Plugins for custom pages -->
 <link href="{{asset('assets/admin/plugins/custom/plugins/jquery-ui/jquery-ui.min.css')}}" rel="stylesheet" type="text/css" />

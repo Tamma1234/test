@@ -9,20 +9,27 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function index() {
-        if(auth()->user() != "") {
-            return redirect()->route('profile.detail');
+    public function index()
+    {
+        if (auth()->user() != "") {
+            $user = auth()->user();
+            return redirect()->route('profile.detail', ['hash' => $user->hash_id]);
         } else {
             return view('admin.home.index');
         }
     }
-    public function login(Request $request) {
+
+    public function login(Request $request)
+    {
         if (auth()->user() != "") {
-            return redirect()->route('profile.detail');
+            $user = auth()->user();
+            return redirect()->route('profile.detail', ['hash' => $user->hash_id]);
         } else {
-                $email = $request->email;
-                $user = User::where('email', $email)->first();
+            $email = $request->email;
+            $user = User::where('email', $email)->first();
+            if ($user) {
                 if ($user->is_active == 1) {
+
                     $credentials = $request->validate([
                         'email' => ['required'],
                         'password' => ['required'],
@@ -36,17 +43,20 @@ class AuthController extends Controller
                      */
                     if (auth()->attempt($credentials, $remenber)) {
                         $request->session()->regenerate();
-                        return redirect()->route('profile.detail');
+                        return redirect()->route('profile.detail', ['hash' => $user->hash_id]);
                     }
 
                     // Còn không sẽ trả về back và hiển thị lỗi email
                     return back()->withErrors([
                         'email' => 'The provided credentials do not match our records.',
                     ]);
-                }  else {
-                    return view('admin.auth.alert');
                 }
-
+               else {
+                   return redirect()->route('home')->with('success', 'Please check your email to activate your registered account');
+               }
+            } else {
+                return redirect()->route('home');
+            }
         }
     }
 

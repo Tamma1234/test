@@ -154,7 +154,6 @@
 <script src="{{asset('assets/admin/plugins/custom/tinymce/themes/silver/theme.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/admin/plugins/custom/tinymce/themes/mobile/theme.js')}}" type="text/javascript"></script>
 <script src="{{ asset('assets/admin/js/pages/custom/login/login-general.js') }}" type="text/javascript"></script>
-
 <!--end:: Vendor Plugins for custom pages -->
 
 <!--end::Global Theme Bundle -->
@@ -213,6 +212,46 @@
     $('.checkbox_all').on('click', function () {
         $(this).parents().find('.checkbox_childrent').prop('checked', $(this).prop('checked'));
         $(this).parents().find('.checkbox_wraper').prop('checked', $(this).prop('checked'));
+    });
+
+    $(document).ready(function () {
+        var thoiluong = 3600;
+
+        function demnguoc() {
+            thoiluong--;
+            let sophut = Math.floor(thoiluong/60);
+            let sogiay = thoiluong % 60;
+            if(sophut < 10) {
+                sophut = "0" + sophut;
+            }
+            if(sogiay < 10) {
+                sogiay = "0" + sogiay;
+            }
+            document.getElementById('sophut').innerHTML = sophut;
+            document.getElementById('sogiay').innerHTML = sogiay;
+
+            setTimeout(demnguoc, 1000);
+        }
+        demnguoc();
+        // function timeDay() {
+        //     const t = new Date();
+        //     let h = t.getHours();
+        //     let m = t.getMinutes();
+        //     let s = t.getSeconds();
+        //     if(h < 10) {
+        //         h = "0" + h;
+        //     }
+        //     if(m < 10) {
+        //         m = "0" + m;
+        //     }
+        //     if(s < 10) {
+        //         s = "0" + s;
+        //     }
+        //     document.getElementById('thoigian').innerHTML = h + ":" + m + ":" + s;
+        //     setTimeout(timeDay, 1000);
+        // }
+        // timeDay();
+
     });
 
 </script>

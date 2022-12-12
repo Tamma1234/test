@@ -1,7 +1,7 @@
 <?php
-    $array = str_split($user->full_name);
-    dd($array);
+    $user = auth()->user();
 ?>
+
 <div id="kt_header" class="kt-header kt-grid__item  kt-header--fixed ">
     <!-- begin:: Header Menu -->
 

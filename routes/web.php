@@ -52,7 +52,8 @@ Route::middleware('auth')->group(function () {
         Route::get('edit/{id}', 'UserController@edit')->name('users.edit');
         Route::post('update/{id}', 'UserController@update')->name('users.update');
         // Cancel account
-        Route::get('/profile', 'UserController@profileDetail')->name('profile.detail');
+        Route::get('/profile/{hash}', 'UserController@profileDetail')->name('profile.detail');
+        Route::get('/download/{file}', 'UserController@download')->name('profile.download');
         Route::post('/update-profile/{id}', 'UserController@updateProfile')->name('update.profile');
 
         Route::get('remove/{id}', 'UserController@delete')->name('users.remove');
@@ -62,5 +63,9 @@ Route::middleware('auth')->group(function () {
         Route::get('delete-completely/{id}', 'UserController@deleteCompletely')->name('users.delete.completely');
     });
 
+    Route::group(['prefix' => 'questions'], function () {
+        Route::get('/', 'QuestionController@index')->name('question.index');
+        Route::get('/detail/{type}', 'QuestionController@detail')->name('question.detail');
+    });
 });
 

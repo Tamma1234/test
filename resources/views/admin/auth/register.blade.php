@@ -26,13 +26,13 @@
                                                    placeholder="Full Name">
                                         </div>
                                         @error('full_name')
-                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        <div class="alert alert-solid-danger alert-bold">{{ $message }}</div>
                                         @enderror
                                         <div class="form-group">
                                             <label for="inputEmail4">Email</label>
                                             <input type="email" class="form-control" name="email" placeholder="Email">
                                             @error('email')
-                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            <div class="alert alert-solid-danger alert-bold">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="form-group">
@@ -41,7 +41,7 @@
                                                    placeholder="Phone">
                                         </div>
                                         @error('phone_number')
-                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        <div class="alert alert-solid-danger alert-bold">{{ $message }}</div>
                                         @enderror
                                         <div class="d-flex justify-content-end pt-3">
                                             <a href="{{ route('home') }}" class="btn btn-light btn-lg"
