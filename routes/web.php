@@ -65,7 +65,10 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['prefix' => 'questions'], function () {
         Route::get('/', 'QuestionController@index')->name('question.index');
+        Route::get('/test', 'QuestionController@test')->name('question.test');
+        Route::get('/start-test', 'QuestionController@startTest')->name('question.start');
         Route::get('/detail/{type}', 'QuestionController@detail')->name('question.detail');
+        Route::get('/post-question', 'QuestionController@postQuestion')->name('post.question');
     });
 });
 

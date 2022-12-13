@@ -238,7 +238,7 @@
                                         class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span
                                         class="kt-menu__link-text">Quiz</span></a></li>
                             <li class="kt-menu__item " aria-haspopup="true"><a
-                                    href="{{ route('profile.detail', ['hash' => $user->hash_id]) }}" class="kt-menu__link "><i
+                                    href="{{ route('question.test') }}" class="kt-menu__link "><i
                                         class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span
                                         class="kt-menu__link-text">Questions</span></a></li>
 {{--                            <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true"--}}

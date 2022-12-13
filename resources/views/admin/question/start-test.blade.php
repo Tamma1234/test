@@ -7,17 +7,17 @@
 
             <!--begin::Portlet-->
             <!--end::Portlet-->
-
+            <div class="col-md-6 col-4 align-self-center" style="color: red;font-size: xx-large;font-weight: 600;">
+                <span id="sophut"></span> : <span id="sogiay"></span>
+            </div>
             <!--begin::Portlet-->
+            @foreach($question_type as $item)
             <div class="kt-portlet">
                 <div class="kt-portlet__head">
                     <div class="kt-portlet__head-label">
                         <h3 class="kt-portlet__head-title">
-                           {{ $question_type->name }}
+                            {{ $item->name }}
                         </h3>
-                    </div>
-                    <div class="col-md-6 col-4 align-self-center" style="color: red;font-size: xx-large;font-weight: 600;">
-                        <span id="sophut"></span> : <span id="sogiay"></span>
                     </div>
                 </div>
                 <!--begin::Form-->
@@ -26,16 +26,17 @@
                     <input type="hidden" value="{{ $time }}" name="time_exam">
                     <div class="kt-portlet__body">
                         <div class="kt-section kt-section--first">
-                            @foreach($question as $item)
-                                <h3 class="kt-section__title">{{ $item->question_content }}</h3>
-                                    <div class="kt-radio-list">
-                                        @foreach($item->answers as $answer)
+                            @foreach($item->questions as $question)
+
+                                <h3 class="kt-section__title">{{ $question->question_content }}</h3>
+                                <div class="kt-radio-list">
+                                    @foreach($question->answers as $answer)
                                         <label class="kt-radio">
                                             <input type="checkbox" name="answers[]" value="{{ $answer->id }}"> {{ $answer->answers }}
                                             <span></span>
                                         </label>
-                                        @endforeach
-                                    </div>
+                                    @endforeach
+                                </div>
                             @endforeach
                         </div>
                     </div>
@@ -54,7 +55,7 @@
 
                 <!--end::Form-->
             </div>
-
+            @endforeach
             <!--end::Portlet-->
         </div>
     </div>

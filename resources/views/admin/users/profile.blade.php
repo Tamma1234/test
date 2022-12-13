@@ -67,9 +67,6 @@
                                                     <input class="form-control" type="text"
                                                            value="{{ $user->full_name }}" name="full_name">
                                                 </div>
-                                                <div class="col-lg-9 col-xl-3">
-                                                    <span id="sophut"></span> : <span id="sogiay"></span>
-                                                </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-xl-3 col-lg-3 col-form-label">Email:</label>

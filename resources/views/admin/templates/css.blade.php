@@ -38,6 +38,7 @@
 <link href="{{ asset('assets/admin/css/pages/login/login-5.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('assets/admin/css/pages/login/login-6.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{asset('assets/admin/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/admin/css/pages/wizard/wizard-4.css') }}" rel="stylesheet" type="text/css" />
 
 <style>
     .custom-checkbox {

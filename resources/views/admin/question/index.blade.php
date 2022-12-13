@@ -12,7 +12,6 @@
                     List Quiz Options
                 </h3>
             </div>
-
         </div>
         <div class="kt-portlet__body">
             <!--begin::Section-->
@@ -28,7 +27,7 @@
                                             <h3 class="kt-callout__title">{{ $item->name }}</h3>
                                         </div>
                                         <div class="kt-callout__action">
-                                            <a href="{{ route('question.detail', ['type' => $item->id]) }}" class="btn btn-custom btn-bold btn-upper btn-font-sm  btn-warning">Detail</a>
+                                            <a href="{{ route('question.detail', ['type' => $item->id]) }}" class="btn btn-custom btn-bold btn-upper btn-font-sm  btn-warning">Bắt đầu thi</a>
                                         </div>
                                     </div>
                                 </div>
