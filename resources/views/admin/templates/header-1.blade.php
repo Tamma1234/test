@@ -1,5 +1,5 @@
 <?php
-    $user = auth()->user();
+$user = auth()->user();
 ?>
 
 <div id="kt_header" class="kt-header kt-grid__item  kt-header--fixed ">
@@ -10,9 +10,6 @@
 -->
     <div class="kt-header-menu-wrapper" id="kt_header_menu_wrapper">
     </div>
-
-    <!-- end:: Header Menu -->
-
     <!-- begin:: Header Topbar -->
     <div class="kt-header__topbar">
         <!--begin: Search -->

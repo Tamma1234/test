@@ -47,7 +47,7 @@ class HomeController extends Controller
         $hashId = Hash::make($id . 'swin');
         $hashString = substr($hashId, 0, 14);
         $path = 'qr-code/' . $hashString . ".svg";
-        $qr_code = QrCode::size(300)->margin(10)->generate($link, public_path($path));
+        QrCode::size(300)->margin(10)->generate($link, public_path($path));
         $link = $hashString . ".svg";
         User::where('id', $id)->update([
             'hash_id' => $hashString,

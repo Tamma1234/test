@@ -32,14 +32,17 @@ class QuestionController extends Controller
     public function startTest() {
         $question_type = QuestionType::all();
         $current = Carbon::now();
+        $totalQuestion =count(Question::all());
         $time = $current->toTimeString();
 
-        return view('admin.question.start-test', compact('question_type', 'time'));
+        return view('admin.question.start-test', compact('question_type','time', 'totalQuestion'));
     }
 
     public function postQuestion(Request $request) {
+        $question_id = $request->question_id;
+        $answers_id = $request->answers_id;
 
-        dd($request->all());
+         dd($request->all());
     }
 
 

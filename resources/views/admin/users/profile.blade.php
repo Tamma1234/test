@@ -181,10 +181,10 @@
                                                 <div class="col-9">
                                                     <div class="kt-radio-inline">
                                                         @foreach($media as $item)
-                                                            @if($user->hasBranch != null)
+                                                        @if($user->hasBranch != null)
                                                                 <label class="kt-radio">
                                                                     <input type="radio"
-                                                                           {{ $item->id == $user->hasBranch->id ? 'checked' : 0 }} name="branch_id"
+                                                                           {{ $user->hasBranch->id == $item->id ? 'checked' : 0 }} name="branch_id"
                                                                            value="{{ $item->id }}"> {{ $item->industry_name }}
                                                                     <span></span>
                                                                 </label>

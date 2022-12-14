@@ -39,12 +39,12 @@
                                         <div class="form-group">
                                             <label>Full Name</label>
                                             <input type="text" disabled class="form-control" name="full_name" placeholder="First Name" value="{{ $user->full_name }}">
-                                            <span class="form-text text-muted">Please enter your first name.</span>
+                                            <span class="form-text text-muted">Please enter your full name.</span>
                                         </div>
                                         <div class="form-group">
                                             <label>Email</label>
                                             <input type="text" disabled class="form-control" name="lname" placeholder="Last Name" value="{{ $user->email }}">
-                                            <span class="form-text text-muted">Please enter your last name.</span>
+                                            <span class="form-text text-muted">Please enter your email.</span>
                                         </div>
                                         <div class="row">
                                             <div class="col-xl-6">
