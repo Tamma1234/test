@@ -39,7 +39,7 @@
 
         <div class="col-lg-12">
             <!--begin::Portlet-->
-            <form class="kt-form kt-form--label-right" action="{{ route('post.question') }}">
+            <form class="kt-form kt-form--label-right" action="{{ route('post.question') }}" id="myForm" method="post">
                 @csrf
                 @foreach($question_type as $item)
                     <div class="kt-portlet">
@@ -50,24 +50,25 @@
                                 </h3>
                             </div>
                         </div>
-                        <input type="hidden" value="{{ $time }}" name="time_exam">
+                        <input type="hidden" value="{{ $user->time_exam }}" name="time_exam" id="time_start">
                         <div class="kt-portlet__body">
-                            <div class="kt-section kt-section--first">
-                                @foreach($item->questions as $question)
-                                    <h3 class="kt-section__title">{{ $question->question_content }}</h3>
-                                    <input type="hidden" id="question" data-id="{{ $question->id}}" value="{{ $question->id }}" name="question_id[]">
+                            @foreach($item->questions as $question)
+                            <div class="kt-section kt-section--first" id="question">
+                                    <h3 class="kt-section__title" id="{{ $question->id }}">{{ $question->question_content }}</h3>
+                                    <input type="hidden" id="question" data-id="{{ $question->id}}" value="{{ $question->id }}" name="question_id-{{ $question->id  }}">
                                     <div class="kt-radio-list">
                                         @foreach($question->answers as $answer)
                                             <label class="kt-radio">
                                                 <input id="answers-{{ $answer->id }}"
-                                                 onchange="addAnswers({{ $answer->id }})" type="checkbox" name="answers[]"
+                                                  type="radio" name="answers-{{ $question->id }}"
                                                        value="{{ $answer->id }}"> {{ $answer->answers }}
                                                 <span></span>
                                             </label>
                                         @endforeach
                                     </div>
-                                @endforeach
                             </div>
+                            @endforeach
+
                         </div>
                         <!--end::Form-->
                     </div>
@@ -77,8 +78,8 @@
                         <div class="row">
                             <div class="col-lg-3"></div>
                             <div class="col-lg-6">
-                                <button type="submit" class="btn btn-success">Submit</button>
-                                <button type="reset" class="btn btn-secondary">Cancel</button>
+                                <button type="submit" class="btn btn-success" >Submit</button>
+                                <button type="button" onclick="demnguoc()" class="btn btn-secondary">Cancel</button>
                             </div>
                         </div>
                     </div>
@@ -89,14 +90,4 @@
         </div>
     </div>
 @endsection
-@section('script')
-    <script>
-        function addAnswers(id) {
-            var answers = $('#answers-' + id ).val();
-            var question = $('#question').val();
-            console.log(question);
-            var totalAnswers = answers.length;
-        }
 
-    </script>
-@endsection

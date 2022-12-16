@@ -26,6 +26,8 @@ class User extends Authenticatable
         'english_level',
         'ielts',
         'toefl',
+        'time_exam',
+        'time_finish',
         'certificate',
         'participation',
         'scholarship_exam'

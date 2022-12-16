@@ -68,7 +68,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/test', 'QuestionController@test')->name('question.test');
         Route::get('/start-test', 'QuestionController@startTest')->name('question.start');
         Route::get('/detail/{type}', 'QuestionController@detail')->name('question.detail');
-        Route::get('/post-question', 'QuestionController@postQuestion')->name('post.question');
+        Route::post('/post-question', 'QuestionController@postQuestion')->name('post.question');
     });
 });
 
