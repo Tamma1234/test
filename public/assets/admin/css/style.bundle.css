@@ -22923,6 +22923,9 @@ strong {
     overflow: hidden;
     display: none;
     width: 100%; }
+.kt-datatable.kt-datatable--default > .kt-datatable__pager .nav nav-tabs nav-tabs-line .nav-item .nav-link active {
+        background: #0a6aa1;
+}
     .kt-datatable.kt-datatable--default > .kt-datatable__table > .kt-datatable__head,
     .kt-datatable.kt-datatable--default > .kt-datatable__table > .kt-datatable__body,
     .kt-datatable.kt-datatable--default > .kt-datatable__table > .kt-datatable__foot {

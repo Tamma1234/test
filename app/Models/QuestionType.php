@@ -12,6 +12,6 @@ class QuestionType extends Model
     protected $table = "question_type";
 
     public function questions() {
-        return $this->hasMany(Question::class, 'question_type', 'id');
+        return $this->hasMany(Questions::class, 'question_type', 'id');
     }
 }

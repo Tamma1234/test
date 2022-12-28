@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
+use App\Models\Questions;
 use App\Models\QuestionType;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class QuestionController extends Controller
         $current = Carbon::now();
         $time = $current->toTimeString();
         $question_type = QuestionType::find($request->type);
-        $question = Question::where('question_type', $request->type)->get();
+        $question = Questions::where('question_type', $request->type)->where('parent_id', 0)->get();
 
         return view('admin.question.detail', compact('question', 'question_type', 'time'));
     }
@@ -31,11 +32,12 @@ class QuestionController extends Controller
     }
 
     public function startTest() {
+        $user = auth()->user();
         $question_type = QuestionType::all();
-        $totalQuestion =count(Question::all());
+        $question = Questions::where('parent_id', 0)->get();
+        $totalQuestion = count($question);
         $current = Carbon::now();
         $time = $current->toTimeString();
-        $user = auth()->user();
         if (!$user->time_exam) {
             $user->update([
                 'time_exam' => $time

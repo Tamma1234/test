@@ -74,10 +74,15 @@
 
                             <!--begin: Form Actions -->
                             <div class="kt-form__actions">
-
+                                @if($user->time_exam == "")
                                 <a class="btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" style="color: white" href="{{ route('question.start') }}">
-                                    Start Test
+                                    Bắt Đầu Thi
                                 </a>
+                                @else
+                                    <a class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" style="color: white" href="#">
+                                        Hoàn Thành
+                                    </a>
+                                @endif
                             </div>
 
                             <!--end: Form Actions -->
