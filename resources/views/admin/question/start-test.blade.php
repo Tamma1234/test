@@ -15,9 +15,8 @@
                         <span class="kt-subheader__breadcrumbs-separator"></span>
                         <a href="#" class="kt-subheader__breadcrumbs-link">
                             Tổng số câu hỏi </a>
-                        <span class="kt-subheader__breadcrumbs-separator"></span>
-                        <a href="" class="kt-subheader__breadcrumbs-link">
-                            0 </a>
+                        <span class="kt-subheader__breadcrumbs-separator"></span>'
+                        <a href="" class="kt-subheader__breadcrumbs-link" id="totalQuestion"> 0 </a>
                         <span class="kt-subheader__breadcrumbs-separator"></span>
                         <a href="#" class="kt-subheader__breadcrumbs-link">
                             {{ $totalQuestion }} </a>
@@ -42,7 +41,7 @@
             <form class="kt-form kt-form--label-right" action="{{ route('post.question') }}" id="myForm" method="post">
                 @csrf
                 @foreach($question_type as $item)
-                    <?php $questions = \App\Models\Questions::where('question_type', $item->id)->where('parent_id', 0)->get();
+                        <?php $questions = \App\Models\Questions::where('question_type', $item->id)->where('parent_id', 0)->get();
                         ?>
                     <div class="kt-portlet">
                         <div class="kt-portlet__head">
@@ -55,23 +54,22 @@
                         <input type="hidden" value="{{ $user->time_exam }}" name="time_exam" id="time_start">
                         <div class="kt-portlet__body">
                             @foreach($questions as $question)
+                                <div class="kt-section kt-section--first" id="question">
+                                    <h3 class="kt-section__title"
+                                        id="{{ $question->id }}">{{ $question->question_content }}</h3>
 
-                            <div class="kt-section kt-section--first" id="question">
-                                    <h3 class="kt-section__title" id="{{ $question->id }}">{{ $question->question_content }}</h3>
-                                    <input type="hidden" id="question" data-id="{{ $question->id}}" value="{{ $question->id }}" name="question_id-{{ $question->id  }}">
                                     <div class="kt-radio-list">
                                         @foreach($question->answers as $answer)
                                             <label class="kt-radio">
-                                                <input id="answers-{{ $answer->id }}"
-                                                  type="radio" name="answers-{{ $question->id }}"
+                                                <input id="answers-{{ $answer->id }}" type="radio"
+                                                       name="answers[{{ $question->id }}]"
                                                        value="{{ $answer->id }}"> {{ $answer->question_content }}
                                                 <span></span>
                                             </label>
                                         @endforeach
                                     </div>
-                            </div>
+                                </div>
                             @endforeach
-
                         </div>
                         <!--end::Form-->
                     </div>
@@ -81,8 +79,9 @@
                         <div class="row">
                             <div class="col-lg-3"></div>
                             <div class="col-lg-6">
-                                <button type="submit" class="btn btn-success" >Submit</button>
-                                <a href="{{ route('question.test') }}" type="button"  class="btn btn-secondary">Cancel</a>
+                                <button type="submit" class="btn btn-success">Submit</button>
+                                <a href="{{ route('question.test') }}" type="button"
+                                   class="btn btn-secondary">Cancel</a>
                             </div>
                         </div>
                     </div>
@@ -93,4 +92,8 @@
         </div>
     </div>
 @endsection
+@section('script')
+    <script>
 
+    </script>
+@endsection

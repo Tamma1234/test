@@ -34,6 +34,8 @@
             @yield('content')
             @include('admin.templates.footer')
             @include('admin.templates.script')
+            @yield('script')
+
         </div>
         </div>
 </div>

@@ -11,6 +11,13 @@ class StudentAnswer extends Model
 
     protected $table = "student_answers";
 
+    protected $fillable = [
+        'user_id',
+        'question_id',
+        'answers_id',
+        'content',
+        'time_submit'
+    ];
     public function questionsAnser() {
         return $this->belongsToMany(Question::class, "student_answers", "question_id", "answers_id");
     }

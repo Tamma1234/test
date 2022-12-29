@@ -316,13 +316,11 @@
             }
             document.getElementById('sophut').innerHTML = sophut;
             document.getElementById('sogiay').innerHTML = sogiay;
-            mytime = setTimeout(demnguoc, 1000);
+            if (thoiluong > 0) {
+                mytime = setTimeout(demnguoc, 1000);
+            }
         }
         demnguoc();
-
-        function tamdung() {
-            clearTimeout(mytime);
-        }
     })
     // $('#btn-finish').on('click', function () {
     //     var question = $('#question h3');
