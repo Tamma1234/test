@@ -291,6 +291,7 @@
 
     $(document).ready(function () {
         var today = new Date();
+
         //xử lí time khi load lại trang
         var timeEnd = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
         var timeStart = $('#time_start').val();
@@ -318,6 +319,16 @@
             document.getElementById('sogiay').innerHTML = sogiay;
             if (thoiluong > 0) {
                 mytime = setTimeout(demnguoc, 1000);
+
+            } else {
+                $.ajax({
+                    url: "{{ route('post.question') }}",
+                    method: 'POST',
+                    data: $('form').serialize(),
+                    success: function () {
+                      window.location = "{{ route('question.test') }}";
+                    }
+                });
             }
         }
         demnguoc();

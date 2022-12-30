@@ -52,17 +52,15 @@
                             </div>
                         </div>
                         <input type="hidden" value="{{ $user->time_exam }}" name="time_exam" id="time_start">
-                        <div class="kt-portlet__body">
+                        <div class="kt-portlet__body" id="question">
                             @foreach($questions as $question)
-                                <div class="kt-section kt-section--first" id="question">
-                                    <h3 class="kt-section__title"
-                                        id="{{ $question->id }}">{{ $question->question_content }}</h3>
-
+                                <div class="kt-section kt-section--first">
+                                    <h3 class="kt-section__title" id="{{ $question->id }}">{{ $question->question_content }}</h3>
                                     <div class="kt-radio-list">
                                         @foreach($question->answers as $answer)
                                             <label class="kt-radio">
-                                                <input id="answers-{{ $answer->id }}" type="radio"
-                                                       name="answers[{{ $question->id }}]"
+                                                <input id="{{ $answer->id }}" onclick="chooseAnswers({{$answer->id}})" type="radio"
+                                                       name="answers[ {{ $question->id }} ]"
                                                        value="{{ $answer->id }}"> {{ $answer->question_content }}
                                                 <span></span>
                                             </label>
@@ -80,8 +78,8 @@
                             <div class="col-lg-3"></div>
                             <div class="col-lg-6">
                                 <button type="submit" class="btn btn-success">Submit</button>
-                                <a href="{{ route('question.test') }}" type="button"
-                                   class="btn btn-secondary">Cancel</a>
+{{--                                <a href="{{ route('question.test') }}" type="button"--}}
+{{--                                   class="btn btn-secondary">Cancel</a>--}}
                             </div>
                         </div>
                     </div>
@@ -94,6 +92,24 @@
 @endsection
 @section('script')
     <script>
+            let questions;
+            function chooseAnswers(id) {
+                var question = $('#question div.kt-section');
+                var arr = [];
+                question.each(function (k, v) {
+                    let id = $(v).find('h3').attr('id');
+                    let da = $(v).find('input[type="radio"]:checked').attr('id');
+                   arr.push(da);
+                })
+                for(let i=0; i < arr.length; i++) {
+                    if(arr[i] != undefined) {
+                        console.log(arr[i]);
+                    }
+
+                }
+
+            }
+
 
     </script>
 @endsection

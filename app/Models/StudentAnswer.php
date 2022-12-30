@@ -16,7 +16,8 @@ class StudentAnswer extends Model
         'question_id',
         'answers_id',
         'content',
-        'time_submit'
+        'time_submit',
+        'dot_thi'
     ];
     public function questionsAnser() {
         return $this->belongsToMany(Question::class, "student_answers", "question_id", "answers_id");

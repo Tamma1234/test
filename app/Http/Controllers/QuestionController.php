@@ -60,24 +60,28 @@ class QuestionController extends Controller
         $time_exam = $request->time_exam;
         $time = Carbon::now();
         $timeString = $time->toTimeString();
+        $dateTime = $time->toDateTimeString();
         $user = auth()->user();
         $user->update([
             'time_exam' => $time_exam,
             'time_finish' => $timeString
         ]);
         $answers = $request->answers;
-        $studentAnswers = new StudentAnswer();
-        foreach ($answers as $key => $item) {
-            $studentAnswers->insert([
-                'user_id' => $user->email,
-                'question_id' => $key =>
-
-
-
-            ])
+        if (!empty($answers)) {
+            $studentAnswers = new StudentAnswer();
+            foreach ($answers as $key => $item) {
+                $studentAnswers->insert([
+                    'user_id' => $user->email,
+                    'question_id' => $key,
+                    'answers_id' => $item,
+                    'content' => "",
+                    'time_submit' => $dateTime,
+                    'dot_thi' => 0
+                ]);
+            }
         }
 
-        dd($request->all());
+        return redirect()->route('question.test')->with('finish_exam', 'You have completed the test');
     }
 
     public function getAnswer(Request $request)
@@ -94,12 +98,14 @@ class QuestionController extends Controller
             $output .= '</label>';
         };
         $output .= '</div >';
+
         return $output;
     }
 
-    public function totalQuestion(Request $request) {
+    public function totalQuestion(Request $request)
+    {
         $id = $request->id;
-        $arr = explode(' ',$id);
+        $arr = explode(' ', $id);
         $question = Questions::where('parent_id', 0)
             ->pluck('id')
             ->toArray();
