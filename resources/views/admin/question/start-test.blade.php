@@ -92,23 +92,21 @@
 @endsection
 @section('script')
     <script>
-            let questions;
-            function chooseAnswers(id) {
-                var question = $('#question div.kt-section');
-                var arr = [];
-                question.each(function (k, v) {
-                    let id = $(v).find('h3').attr('id');
-                    let da = $(v).find('input[type="radio"]:checked').attr('id');
-                   arr.push(da);
-                })
-                for(let i=0; i < arr.length; i++) {
-                    if(arr[i] != undefined) {
-                        console.log(arr[i]);
-                    }
-
-                }
-
-            }
+            // let questions;
+            // function chooseAnswers(id) {
+            //     var question = $('#question div.kt-section');
+            //     var arr = [];
+            //     question.each(function (k, v) {
+            //         let id = $(v).find('h3').attr('id');
+            //         let da = $(v).find('input[type="radio"]:checked').attr('id');
+            //        arr.push(da);
+            //     })
+            //     console.log(arr.length);
+            //     // const result = arr.filter((value, index) => {
+            //     //     console.log(value.length);
+            //     // })
+            //
+            // }
 
 
     </script>

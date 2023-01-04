@@ -22067,7 +22067,7 @@ strong {
         margin: 0;
         padding: 0;
         font-size: 1.2rem;
-        font-weight: 500;
+        font-weight: 600;
         color: #48465b; }
         .kt-portlet .kt-portlet__head .kt-portlet__head-label .kt-portlet__head-title small {
           font-weight: 300;
@@ -23514,7 +23514,9 @@ strong {
 
 @media (min-width: 1025px) {
   .kt-form.kt-form--label-right .form-group label:not(.kt-checkbox):not(.kt-radio):not(.kt-option) {
-    text-align: right; } }
+    text-align: left;
+    font-width: 600;
+  } }
 
 .kt-input-icon {
   position: relative;
@@ -30743,8 +30745,8 @@ strong {
       padding-top: 0; }
     .kt-widget1 .kt-widget1__item .kt-widget1__info .kt-widget1__title {
       font-size: 1.1rem;
-      font-weight: 500;
-      color: #595d6e; }
+      font-weight: 600;
+      color: #515152; }
     .kt-widget1 .kt-widget1__item .kt-widget1__info .kt-widget1__desc {
       font-size: 1rem;
       font-weight: normal;

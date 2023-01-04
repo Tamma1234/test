@@ -53,6 +53,7 @@ Route::middleware('auth')->group(function () {
         Route::post('update/{id}', 'UserController@update')->name('users.update');
         // Cancel account
         Route::get('/profile/{hash}', 'UserController@profileDetail')->name('profile.detail');
+        Route::get('/list-profile', 'UserController@listProfile')->name('profile.list');
         Route::get('/download/{file}', 'UserController@download')->name('profile.download');
         Route::post('/update-profile/{id}', 'UserController@updateProfile')->name('update.profile');
 
