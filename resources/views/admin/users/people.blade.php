@@ -43,7 +43,7 @@
                         <div class="kt-portlet">
                             <div class="kt-portlet__head">
                                 <div class="kt-portlet__head-label">
-                                    <h3 class="kt-portlet__head-title">Account Information</h3>
+                                    <h3 class="kt-portlet__head-title">PHIẾU ĐĂNG KÝ THAM GIA XÉT TUYỂN VÀ HỌC BỔNG</h3>
                                 </div>
                             </div>
                             <form class="kt-form kt-form--label-right"
@@ -56,8 +56,7 @@
                                         <div class="kt-section__body">
                                             <div class="form-group row">
                                                 <label class="col-form-label btn-label text-left">1. Họ, chữ đệm và tên
-                                                    thí sinh(viết đúng như giấy khai sinh bằng chữ in hoa có dấu
-                                                    )</label>
+                                                    thí sinh (viết đúng như giấy khai sinh bằng chữ in hoa có dấu)</label>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-xl-3 col-lg-3 col-form-label">Họ và tên:</label>
@@ -69,10 +68,18 @@
                                             <div class="form-group row">
                                                 <label class="col-xl-3 col-lg-3 col-form-label">Giới tính:</label>
                                                 <div class="col-lg-9 col-xl-6">
-                                                    <select class="form-control">
-                                                        <option value="1">Nam</option>
-                                                        <option value="0">Nữ</option>
-                                                    </select>
+                                                    <div class="kt-radio-inline">
+                                                        <label class="kt-radio">
+                                                            <input type="radio" name="gender"
+                                                                   value="0"> Nam
+                                                            <span></span>
+                                                        </label>
+                                                        <label class="kt-radio">
+                                                            <input type="radio" name="gender"
+                                                                   value="1"> Nữ
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -82,33 +89,42 @@
                                             <div class="form-group row">
                                                 <label class="col-xl-3 col-lg-3 col-form-label">Ngày tháng:</label>
                                                 <div class="col-lg-9 col-xl-6">
-                                                    <input class="form-control" type="date" value="2011-08-19"
+                                                    <input class="form-control" name="dob" type="date" value=""
                                                            id="example-date-input">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-form-label btn-label text-left">3. Trường THPT (ghi rõ
-                                                    tên trường):</label>
+                                                <label class="col-form-label btn-label text-left">3. Trường THPT:</label>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Tỉnh/Thành:</label>
+                                                <div class="col-lg-9 col-xl-6">
+{{--                                                    <input class="form-control" type="text" name="" value=""--}}
+{{--                                                           placeholder="Ví dụ: Quận Ba Đình">--}}
+                                                    <select class="form-control choose province" data-live-search="true" id="city" name="province_id">
+                                                        <option value="" >Chọn Tỉnh/Thành</option>
+                                                        @foreach($provinces as $item)
+                                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Quận/Huyện:</label>
+                                                <div class="col-lg-9 col-xl-6">
+                                                    <select class="form-control choose" data-live-search="true" id="district" name="district_id">
+                                                        <option value="">Chọn Quận/huyện</option>
+                                                    </select>
+                                                </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-xl-3 col-lg-3 col-form-label">Trường THPT:</label>
                                                 <div class="col-lg-9 col-xl-6">
-                                                    <input class="form-control" type="text" value=""
-                                                           placeholder="Ví dụ: THPT Minh Khai">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">Quận/huyện:</label>
-                                                <div class="col-lg-9 col-xl-6">
-                                                    <input class="form-control" type="text" value=""
-                                                           placeholder="Ví dụ: Quận Ba Đình">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">Tỉnh/TP:</label>
-                                                <div class="col-lg-9 col-xl-6">
-                                                    <input class="form-control" type="text" value=""
-                                                           placeholder="Ví dụ: Hà Nội">
+                                                    {{--                                                    <input class="form-control" name="pschool_name" type="text" value=""--}}
+                                                    {{--                                                           placeholder="Ví dụ: THPT Minh Khai">--}}
+                                                    <select class="form-control" name="school_id" id="school">
+                                                        <option value="">Chọn Trường</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -116,7 +132,7 @@
                                                     chưa tốt nghiệp: điểm trung bình học kỳ 1 hoặc điểm trung bình lớp
                                                     12:</label>
                                                 <div class="col-lg-2 col-xl-2">
-                                                    <input class="form-control" type="text" name="ielts" value=""
+                                                    <input class="form-control" type="text" name="gpa" value=""
                                                            placeholder="Ví dụ: 8.0">
                                                 </div>
                                             </div>
@@ -127,8 +143,8 @@
                                             <div class="form-group row">
                                                 <label class="col-form-label">Năm tốt nghiệp THPT:</label>
                                                 <div class="col-lg-2 col-xl-2">
-                                                    <input class="form-control" type="text" name="ielts"
-                                                           value="" placeholder="Ví dụ: THPT Minh Khai">
+                                                    <input class="form-control" type="text" name="graduated_year"
+                                                           value="" placeholder="Ví dụ: 2020">
                                                 </div>
                                                 <label class="col-form-label">Xếp loại tốt nghiệp:</label>
                                                 <div class="col-lg-2 col-xl-2">
@@ -137,7 +153,7 @@
                                                 </div>
                                                 <label class="col-form-label">Điểm tốt nghiệp:</label>
                                                 <div class="col-lg-2 col-xl-2">
-                                                    <input class="form-control" type="text" name="certificate"
+                                                    <input class="form-control" type="text" name="gpa"
                                                            value="" placeholder="Ví dụ: 9.0">
                                                 </div>
                                             </div>
@@ -147,23 +163,23 @@
                                             </div>
                                             <div class="kt-radio-inline">
                                                 <label class="kt-radio col-2">
-                                                    <input type="radio" name="branch_id"
-                                                           value="">Chưa biết
+                                                    <input type="radio" name="english_level"
+                                                           value="1">Chưa biết
                                                     <span></span>
                                                 </label>
                                                 <label class="kt-radio col-2">
                                                     <input type="radio" name="branch_id"
-                                                           value="">Cơ bản
+                                                           value="2">Cơ bản
                                                     <span></span>
                                                 </label>
                                                 <label class="kt-radio col-2">
                                                     <input type="radio" name="branch_id"
-                                                           value="">Khá
+                                                           value="3">Khá
                                                     <span></span>
                                                 </label>
                                                 <label class="kt-radio col-2">
                                                     <input type="radio" name="branch_id"
-                                                           value="">Tốt
+                                                           value="4">Tốt
                                                     <span></span>
                                                 </label>
                                             </div>
@@ -175,29 +191,100 @@
                                                 </div>
                                                 <label class="col-form-label">Ngày thi:</label>
                                                 <div class="col-lg-2 col-xl-2">
-                                                    <input class="form-control" type="text" name="toefl"
+                                                    <input class="form-control" type="text" name="pgen_code_date"
                                                            value="" placeholder="Ví dụ: 01/01/2020">
                                                 </div>
                                                 <label class="col-form-label">Kết quả:</label>
                                                 <div class="col-lg-2 col-xl-2">
-                                                    <input class="form-control" type="text" name="certificate"
+                                                    <input class="form-control" type="text" name="ielts"
                                                            value="" placeholder="Ví dụ: 6.5">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-form-label btn-label text-left">7. Số CCCD số:</label>
                                                 <div class="col-lg-2 col-xl-2">
-                                                    <input class="form-control" type="text" name="certificate"
+                                                    <input class="form-control" type="text" name="cmt"
+                                                           value="" placeholder="Ví dụ: 001202015340">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-form-label">Ngày cấp:</label>
+                                                <div class="col-lg-2 col-xl-4">
+                                                    <input class="form-control" type="date" name="cmt_provided_date"
+                                                           id="example-date-input" placeholder="Ví dụ: 01/01/2020">
+                                                </div>
+                                                <label class="col-form-label">Nơi cấp:</label>
+                                                <div class="col-lg-2 col-xl-4">
+                                                    <input class="form-control" type="text" name="cmt_provided_where"
+                                                           value="" placeholder="Ví dụ: Công An TP HÀ Nội">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-form-label btn-label text-left">8. Địa chỉ liên
+                                                    hệ:</label>
+                                                <div class="col-lg-2 col-xl-8">
+                                                    <input class="form-control" type="text" name="paddress"
+                                                           value="" placeholder="Ví dụ: 80 Duy Tân - Cầu Giấy - Hà Nội">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-form-label btn-label text-left">9. Mobile:</label>
+                                                <div class="col-lg-2 col-xl-3">
+                                                    <input class="form-control" type="text" name="ptelephone"
+                                                           value="" placeholder="">
+                                                </div>
+                                                <label class="col-form-label">Home Phone:</label>
+                                                <div class="col-lg-2 col-xl-4">
+                                                    <input class="form-control" type="text" name="pphone"
                                                            value="" placeholder="">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-form-label btn-label text-left">1. Các ngành học hiện
-                                                    nay
-                                                    ở Swinburne Việt Nam, bạn quan tâm đến ngành nào:</label>
+                                                <label class="col-form-label">Email:</label>
+                                                <div class="col-lg-2 col-xl-8">
+                                                    <input class="form-control" type="text" name="pemail"
+                                                           value="" placeholder="Ví dụ: tamma1290@gmail.com">
+                                                </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-3 col-form-label">Công nghệ thông tin:</label>
+                                                <label class="col-form-label btn-label text-left">10. Họ tên bố/mẹ/người
+                                                    giám hộ:</label>
+                                                <div class="col-lg-2 col-xl-6">
+                                                    <input class="form-control" type="text" name=""
+                                                           value="" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-form-label">Nghề nghiệp:</label>
+                                                <div class="col-lg-2 col-xl-6">
+                                                    <input class="form-control" type="text" name=""
+                                                           value="" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-form-label">Nơi công tác:</label>
+                                                <div class="col-lg-2 col-xl-4">
+                                                    <input class="form-control" type="text" name=""
+                                                           value=""
+                                                           placeholder="Ví dụ: Số 2 -Dương Khuê - Mai Dịch - Cầu Giấy - Hà Nội">
+                                                </div>
+                                                <label class="col-form-label">Email:</label>
+                                                <div class="col-lg-2 col-xl-2">
+                                                    <input class="form-control" type="text" name=""
+                                                           value="" placeholder="Ví dụ: thuyquynh123@gmail.com">
+                                                </div>
+                                                <label class="col-form-label">Mobile:</label>
+                                                <div class="col-lg-2 col-xl-2">
+                                                    <input class="form-control" type="text" name=""
+                                                           value="" placeholder="ví dụ: 0987566666">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-form-label btn-label text-left">11. Ngành đăng ký:(cập
+                                                    nhập theo quy chế tuyển sinh)</label>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-3 col-form-label">1. Công nghệ thông tin:</label>
                                                 <div class="col-9">
                                                     <div class="kt-radio-inline">
                                                         @foreach($information as $item)
@@ -220,7 +307,8 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-3 col-form-label">Kinh doanh:</label>
+                                                <label class="col-3 col-form-label">2. Ngành quản trịnh kinh
+                                                    doanh:</label>
                                                 <div class="col-9">
                                                     <div class="kt-radio-inline">
                                                         @foreach($business as $item)
@@ -243,7 +331,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-3 col-form-label ">Truyền thông đa phương
+                                                <label class="col-3 col-form-label ">3. Ngành truyền thông đa phương
                                                     tiện:</label>
                                                 <div class="col-9">
                                                     <div class="kt-radio-inline">
@@ -267,42 +355,8 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-form-label btn-label text-left">2. Kế hoạch
-                                                    sau khi thi
-                                                    THPT Quốc gia của bạn:</label>
-                                                <div class="col-lg-9 col-xl-6">
-                                                    <div class="kt-radio-inline">
-                                                        <label class="kt-radio">
-                                                            <input type="radio"
-                                                                   {{ $user->after_exam == 1 ? 'checked' : "" }} name="after_exam"
-                                                                   value="1"> Du học
-                                                            <span></span>
-                                                        </label>
-                                                        <label class="kt-radio">
-                                                            <input type="radio"
-                                                                   {{ $user->after_exam == 2 ? 'checked' : "" }} name="after_exam"
-                                                                   value="2"> Học ĐH Quốc tế
-                                                            <span></span>
-                                                        </label>
-                                                        <label class="kt-radio">
-                                                            <input type="radio"
-                                                                   {{ $user->after_exam == 3 ? 'checked' : "" }} name="after_exam"
-                                                                   value="3"> Học ĐH công lập
-                                                            <span></span>
-                                                        </label>
-                                                        <label class="kt-radio">
-                                                            <input type="radio"
-                                                                   {{ $user->after_exam == 4 ? 'checked' : "" }} name="after_exam"
-                                                                   value="4"> Khác
-                                                            <span></span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-form-label btn-label text-left">3. Tham gia ký
-                                                    chuyển tiếp
-                                                    quốc tế với Swinburne Australia:</label>
+                                                <label class="col-form-label btn-label text-left">12. Đăng ký xét tuyển
+                                                    thẳng và học bổng tại Swinburne Việt Nam:</label>
                                                 <div class="col-lg-9 col-xl-6">
                                                     <div class="kt-radio-inline">
                                                         <label class="kt-radio">
@@ -320,116 +374,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
-                                                <label class="col-form-label btn-label text-left">4. Trình độ
-                                                    tiếng Anh của
-                                                    bạn hiện nay:</label>
-                                                <div class="col-lg-9 col-xl-6">
-                                                    <div class="kt-radio-inline">
-                                                        <label class="kt-radio">
-                                                            <input type="radio"
-                                                                   {{ $user->english_level == 1 ? 'checked' : "" }} name="english_level"
-                                                                   value="1"> Trung bình
-                                                            <span></span>
-                                                        </label>
-                                                        <label class="kt-radio">
-                                                            <input type="radio"
-                                                                   {{ $user->english_level == 2 ? 'checked' : "" }} name="english_level"
-                                                                   value="2"> Khá
-                                                            <span></span>
-                                                        </label>
-                                                        <label class="kt-radio">
-                                                            <input type="radio"
-                                                                   {{ $user->english_level == 3 ? 'checked' : "" }} name="english_level"
-                                                                   value="3"> Tốt
-                                                            <span></span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-form-label btn-label text-left">Chứng chỉ quốc
-                                                    tế
-                                                    IELTS/TOEFL/PTE thi gần nhất đạt:</label>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-xl-1 col-lg-2 col-form-label">IELTS:</label>
-                                                <div class="col-lg-2 col-xl-2">
-                                                    <input class="form-control" type="text" name="ielts"
-                                                           value="{{ $user->ielts }}">
-                                                </div>
-                                                <label class="col-xl-1 col-lg-2 col-form-label">TOEFL:</label>
-                                                <div class="col-lg-2 col-xl-2">
-                                                    <input class="form-control" type="text" name="toefl"
-                                                           value="{{ $user->toefl }}">
-                                                </div>
-                                                <label class="col-xl-1 col-lg-2 col-form-label">Khác:</label>
-                                                <div class="col-lg-2 col-xl-2">
-                                                    <input class="form-control" type="text" name="certificate"
-                                                           value="{{ $user->certificate }}">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-form-label btn-label text-left"> 5. Bạn có
-                                                    thích được tham
-                                                    gia hoạt động sinh viên, thực tế tại doanh nghiệp và môi trường trải
-                                                    nghiệm quốc tế không ?</label>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-lg-9 col-xl-6">
-                                                    <div class="kt-radio-inline text-center">
-                                                        <label class="kt-radio">
-                                                            <input type="radio"
-                                                                   {{ $user->participation == 1 ? 'checked' : "" }} name="participation"
-                                                                   value="1"> Rất thích tham gia
-                                                            <span></span>
-                                                        </label>
-                                                        <label class="kt-radio">
-                                                            <input type="radio"
-                                                                   {{ $user->participation == 2 ? 'checked' : "" }} name="participation"
-                                                                   value="2"> Bình hường
-                                                            <span></span>
-                                                        </label>
-                                                        <label class="kt-radio">
-                                                            <input type="radio"
-                                                                   {{ $user->participation == 3 ? 'checked' : "" }} name="participation"
-                                                                   value="3"> Không thích tham gia
-                                                            <span></span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-form-label btn-label text-left">6. Bạn có quan tâm đến
-                                                    kỳ
-                                                    thi tuyển học bổng "Thắp sáng tương lai" của Swinburne
-                                                    không?</label>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-lg-9 col-xl-6">
-                                                    <div class="kt-radio-inline text-center">
-                                                        <label class="kt-radio">
-                                                            <input type="radio"
-                                                                   {{ $user->scholarship_exam == 1 ? 'checked' : "" }} name="scholarship_exam"
-                                                                   value="1"> Có
-                                                            <span></span>
-                                                        </label>
-                                                        <label class="kt-radio">
-                                                            <input type="radio"
-                                                                   {{ $user->scholarship_exam == 2 ? 'checked' : "" }} name="scholarship_exam"
-                                                                   value="2"> Không
-                                                            <span></span>
-                                                        </label>
-                                                        <label class="kt-radio">
-                                                            <input type="radio"
-                                                                   {{ $user->scholarship_exam == 3 ? 'checked' : "" }} name="scholarship_exam"
-                                                                   value="3"> Em muốn tư vấn thêm
-                                                            <span></span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-form-label btn-label text-left">13. Cam kết của thí sinh:</label>
                                         </div>
                                         <div class="kt-form__actions text-center">
                                             <div class="row">
@@ -450,10 +397,34 @@
             </div>
             <!--End:: App Content-->
         </div>
-
         <!--End::App-->
     </div>
-
 @endsection
+@section('script')
+    <script>
+        $(document).ready(function () {
+            $('.choose').on('change', function () {
+                var action = $(this).attr('id');
+                var id = $(this).val();
+                var _token = $('input[name="_token"]').val();
+                var result = "";
+                if (action == 'city') {
+                    result = "district";
+                } else {
+                    result = "school";
+                }
+                $.ajax({
+                    url: "{{ route('select.school') }}",
+                    method: 'POST',
+                    data: {action: action, id: id, _token: _token},
+                    success: function (data) {
+                        console.log(data);
+                        $('#' + result).html(data);
+                    }
+                });
+            })
+        });
+        // $('select').selectpicker();
 
-
+    </script>
+@endsection

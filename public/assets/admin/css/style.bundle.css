@@ -13280,7 +13280,9 @@ code {
   border: 0; }
 
 .bootstrap-select .dropdown-menu {
-  margin-top: 1px; }
+  margin-top: 1px;
+  height: 350px;
+}
 
 #session-timeout-dialog .modal-header .close {
   position: absolute;

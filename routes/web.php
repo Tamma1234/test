@@ -56,6 +56,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/list-profile', 'UserController@listProfile')->name('profile.list');
         Route::get('/download/{file}', 'UserController@download')->name('profile.download');
         Route::post('/update-profile/{id}', 'UserController@updateProfile')->name('update.profile');
+        // Select School, Province, District
+        Route::post('/select-school', 'UserController@selectSchool')->name('select.school');
 
         Route::get('remove/{id}', 'UserController@delete')->name('users.remove');
         // List user delete
