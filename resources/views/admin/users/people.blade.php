@@ -2,7 +2,7 @@
 @section('title', 'Create')
 
 @section('content')
-    @include('admin.templates.content-header', ['name' => 'Swinburne', 'key' => 'Queries', 'value' => "", 'value2' => ""])
+{{--    @include('admin.templates.content-header', ['name' => 'Swinburne', 'key' => 'Queries', 'value' => "", 'value2' => ""])--}}
     <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
         <!--Begin::App-->
         <div class="kt-grid kt-grid--desktop kt-grid--ver kt-grid--ver-desktop kt-app">
@@ -168,17 +168,17 @@
                                                     <span></span>
                                                 </label>
                                                 <label class="kt-radio col-2">
-                                                    <input type="radio" name="branch_id"
+                                                    <input type="radio" name="english_level"
                                                            value="2">Cơ bản
                                                     <span></span>
                                                 </label>
                                                 <label class="kt-radio col-2">
-                                                    <input type="radio" name="branch_id"
+                                                    <input type="radio" name="english_level"
                                                            value="3">Khá
                                                     <span></span>
                                                 </label>
                                                 <label class="kt-radio col-2">
-                                                    <input type="radio" name="branch_id"
+                                                    <input type="radio" name="english_level"
                                                            value="4">Tốt
                                                     <span></span>
                                                 </label>
@@ -186,7 +186,7 @@
                                             <div class="form-group row">
                                                 <label class="col-form-label">Chứng chỉ tiếng Anh(nếu có):</label>
                                                 <div class="col-lg-2 col-xl-2">
-                                                    <input class="form-control" type="text" name="ielts"
+                                                    <input class="form-control" type="text" name=""
                                                            value="" placeholder="Ví dụ: IELTS">
                                                 </div>
                                                 <label class="col-form-label">Ngày thi:</label>

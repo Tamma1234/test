@@ -31,11 +31,13 @@
         @include('admin.templates.nav-bar')
         <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper" id="kt_wrapper">
             @include('admin.templates.header')
-            @yield('content')
-            @include('admin.templates.footer')
+            <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+                <!-- begin:: Subheader -->
+                @yield('content')
+            </div>
+                @include('admin.templates.footer')
             @include('admin.templates.script')
             @yield('script')
-
         </div>
         </div>
 </div>

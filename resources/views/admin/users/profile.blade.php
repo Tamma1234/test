@@ -2,7 +2,7 @@
 @section('title', 'Create')
 
 @section('content')
-    @include('admin.templates.content-header', ['name' => 'Swinburne', 'key' => 'Queries', 'value' => "", 'value2' => ""])
+    @include('admin.templates.content-header', ['name' => 'Swinburne', 'key' => 'Profile', 'value' => "", 'value2' => ""])
     <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
         <!--Begin::App-->
         <div class="kt-grid kt-grid--desktop kt-grid--ver kt-grid--ver-desktop kt-app">
@@ -385,7 +385,18 @@
                         <!--Begin::Section-->
                         <div class="kt-portlet">
                             <div class="kt-portlet__body kt-portlet__body--fit">
+                                <div class="kt-portlet kt-portlet--height-fluid">
+                                    <div class="kt-portlet__head">
+                                        <div class="kt-portlet__head-label">
+                                            <h3 class="kt-portlet__head-title">
+                                                Swinburne Hà Nội - Swinburne Hà Nội
+                                            </h3>
+                                        </div>
+                                    </div>
+
+                                </div>
                                 <div class="row row-no-padding row-col-separator-xl">
+
                                     <div class="col-md-12 col-lg-12 col-xl-4">
 
                                         <!--begin:: Widgets/Stats2-1 -->
@@ -400,13 +411,15 @@
                                                 <div class="kt-widget1__info">
                                                     <h3 class="kt-widget1__title">Address HKTT:</h3>
                                                 </div>
-                                                <span class="kt-kt-widget12__desc">{{ $people->paddress }}</span>
+                                                <input type="textarea" class="form__control"
+                                                       value="{{ $people->paddress }}">
                                             </div>
                                             <div class="kt-widget1__item">
                                                 <div class="kt-widget1__info">
                                                     <h3 class="kt-widget1__title">Post office address:</h3>
                                                 </div>
-                                                <span class="kt-kt-widget12__desc">{{ $people->paddress }}</span>
+                                                <input type="text" class="form__control"
+                                                       value="{{ $people->paddress }}">
                                             </div>
                                             <div class="kt-widget1__item">
                                                 <div class="kt-widget1__info">
@@ -454,6 +467,27 @@
                                                 </div>
                                                 <span
                                                     class="kt-kt-widget12__desc"></span>
+                                            </div>
+                                            <div class="kt-widget1__item">
+                                                <div class="kt-widget1__info">
+                                                    <h3 class="kt-widget1__title">Ielts:</h3>
+                                                </div>
+                                                <span
+                                                    class="kt-kt-widget12__desc">{{ $people->ielts }}</span>
+                                            </div>
+                                            <div class="kt-widget1__item">
+                                                <div class="kt-widget1__info">
+                                                    <h3 class="kt-widget1__title">CMT:</h3>
+                                                </div>
+                                                <span
+                                                    class="kt-kt-widget12__desc">{{ $people->cmt }}</span>
+                                            </div>
+                                            <div class="kt-widget1__item">
+                                                <div class="kt-widget1__info">
+                                                    <h3 class="kt-widget1__title">Created Date:</h3>
+                                                </div>
+                                                <span
+                                                    class="kt-kt-widget12__desc">{{ $people->created_date }}</span>
                                             </div>
                                         </div>
                                         <!--end:: Widgets/Stats2-1 -->
@@ -526,8 +560,21 @@
                                                     <h3 class="kt-widget1__title">Comming year:</h3>
                                                 </div>
                                             </div>
+                                            <div class="kt-widget1__item">
+                                                <div class="kt-widget1__info">
+                                                    <h3 class="kt-widget1__title">GPA:</h3>
+                                                </div>
+                                                <span
+                                                    class="kt-kt-widget12__desc">{{ $people->gpa }}</span>
+                                            </div>
+                                            <div class="kt-widget1__item">
+                                                <div class="kt-widget1__info">
+                                                    <h3 class="kt-widget1__title">Date of issue:</h3>
+                                                </div>
+                                                <span
+                                                    class="kt-kt-widget12__desc"></span>
+                                            </div>
                                         </div>
-
                                         <!--end:: Widgets/Stats2-2 -->
                                     </div>
                                     <div class="col-md-12 col-lg-12 col-xl-4">
@@ -570,7 +617,8 @@
                                                 <select class="form-control" id="exampleSelects" style="width: 60%">
                                                     <option>Select</option>
                                                     @foreach($brand as $item)
-                                                    <option {{ $people->pbrand_id == $item->id ? "selected" : "" }} value="{{ $item->id }}">{{ $item->name }}</option>
+                                                        <option {{ $people->pbrand_id == $item->id ? "selected" : "" }}
+                                                                value="{{ $item->id }}">{{ $item->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -586,6 +634,24 @@
                                             <div class="kt-widget1__item">
                                                 <div class="kt-widget1__info">
                                                     <h3 class="kt-widget1__title">Grade:</h3>
+                                                </div>
+                                                <span class="kt-kt-widget12__desc"></span>
+                                            </div>
+                                            <div class="kt-widget1__item">
+                                                <div class="kt-widget1__info">
+                                                    <h3 class="kt-widget1__title">Scholarship:</h3>
+                                                </div>
+                                                <span class="kt-kt-widget12__desc"></span>
+                                            </div>
+                                            <div class="kt-widget1__item">
+                                                <div class="kt-widget1__info">
+                                                    <h3 class="kt-widget1__title">Place of issue:</h3>
+                                                </div>
+                                                <span class="kt-kt-widget12__desc"></span>
+                                            </div>
+                                            <div class="kt-widget1__item">
+                                                <div class="kt-widget1__info">
+                                                    <h3 class="kt-widget1__title">Updated by:</h3>
                                                 </div>
                                                 <span class="kt-kt-widget12__desc"></span>
                                             </div>

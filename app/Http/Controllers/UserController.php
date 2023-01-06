@@ -26,8 +26,8 @@ class UserController extends Controller
     {
         $user = auth()->user();
         $brand = Brand::all();
-        $id = $user->id;
-        $people = People::find($id);
+        $email = $user->email;
+        $people = People::where('pemail', $email)->first();
         $date = $people->dob;
         $time = strtotime($date);
         $format = date("d/m/Y", $time);

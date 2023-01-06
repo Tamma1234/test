@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
+use App\Models\People;
 use App\Models\User;
 use Dflydev\DotAccessData\Data;
 use Faker\Guesser\Name;
@@ -36,7 +37,7 @@ class HomeController extends Controller
         $phone_number = $request->phone_number;
         $password = "123@123a";
         $hashPassword = Hash::make($password);
-        $user = User::create([
+        $user = People::create([
             'full_name' => $full_name,
             'email' => $email,
             'phone_number' => $request->phone_number,
