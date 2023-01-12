@@ -2,7 +2,8 @@
 @section('title', 'Create')
 
 @section('content')
-{{--    @include('admin.templates.content-header', ['name' => 'Swinburne', 'key' => 'Queries', 'value' => "", 'value2' => ""])--}}
+
+    {{--    @include('admin.templates.content-header', ['name' => 'Swinburne', 'key' => 'Queries', 'value' => "", 'value2' => ""])--}}
     <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
         <!--Begin::App-->
         <div class="kt-grid kt-grid--desktop kt-grid--ver kt-grid--ver-desktop kt-app">
@@ -51,18 +52,25 @@
                                   enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" value="{{ $user->id }}" name="id">
+
                                 <div class="kt-portlet__body">
                                     <div class="kt-section kt-section--first">
                                         <div class="kt-section__body">
                                             <div class="form-group row">
                                                 <label class="col-form-label btn-label text-left">1. Họ, chữ đệm và tên
-                                                    thí sinh (viết đúng như giấy khai sinh bằng chữ in hoa có dấu)</label>
+                                                    thí sinh (viết đúng như giấy khai sinh bằng chữ in hoa có
+                                                    dấu)</label>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">Họ và tên:</label>
-                                                <div class="col-lg-9 col-xl-6">
+                                                <label class="col-form-label">Tên:</label>
+                                                <div class="col-lg-2 col-xl-4">
                                                     <input class="form-control" type="text"
-                                                           value="{{ $user->full_name }}" name="full_name">
+                                                           value="{{ $user->first_name }}" name="first_name">
+                                                </div>
+                                                <label class="col-form-label">Họ:</label>
+                                                <div class="col-lg-2 col-xl-4">
+                                                    <input class="form-control" type="text" name="last_name"
+                                                           value="{{ $user->last_name }}" placeholder="Ví dụ: 9.0">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -70,18 +78,21 @@
                                                 <div class="col-lg-9 col-xl-6">
                                                     <div class="kt-radio-inline">
                                                         <label class="kt-radio">
-                                                            <input type="radio" name="gender"
-                                                                   value="0"> Nam
+                                                            <input type="radio"
+                                                                   {{ $user->gender == 1 ? "checked" : "" }} name="gender"
+                                                                   value="1"> Nam
                                                             <span></span>
                                                         </label>
                                                         <label class="kt-radio">
-                                                            <input type="radio" name="gender"
-                                                                   value="1"> Nữ
+                                                            <input type="radio"
+                                                                   {{ $user->gender == 0 ? "checked" : "" }} name="gender"
+                                                                   value="0"> Nữ
                                                             <span></span>
                                                         </label>
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <div class="form-group row">
                                                 <label class="col-form-label btn-label text-left">2. Ngày, tháng, năm
                                                     sinh:</label>
@@ -89,22 +100,26 @@
                                             <div class="form-group row">
                                                 <label class="col-xl-3 col-lg-3 col-form-label">Ngày tháng:</label>
                                                 <div class="col-lg-9 col-xl-6">
-                                                    <input class="form-control" name="dob" type="date" value=""
+                                                    <input class="form-control" name="dob" type="date"
+                                                           value="{{ $user->dob }}"
                                                            id="example-date-input">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-form-label btn-label text-left">3. Trường THPT:</label>
+                                                <label class="col-form-label btn-label text-left">3. Trường
+                                                    THPT:</label>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-xl-3 col-lg-3 col-form-label">Tỉnh/Thành:</label>
                                                 <div class="col-lg-9 col-xl-6">
-{{--                                                    <input class="form-control" type="text" name="" value=""--}}
-{{--                                                           placeholder="Ví dụ: Quận Ba Đình">--}}
-                                                    <select class="form-control choose province" data-live-search="true" id="city" name="province_id">
-                                                        <option value="" >Chọn Tỉnh/Thành</option>
+                                                    {{--                                                    <input class="form-control" type="text" name="" value=""--}}
+                                                    {{--                                                           placeholder="Ví dụ: Quận Ba Đình">--}}
+                                                    <select class="form-control choose province" data-live-search="true"
+                                                            id="city" name="pprovince_id">
+                                                        <option value="">Chọn Tỉnh/Thành</option>
                                                         @foreach($provinces as $item)
-                                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                            <option
+                                                                {{ $user->pprovince_id == $item->id ? "selected" : "" }} value="{{ $item->id }}">{{ $item->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -112,8 +127,13 @@
                                             <div class="form-group row">
                                                 <label class="col-xl-3 col-lg-3 col-form-label">Quận/Huyện:</label>
                                                 <div class="col-lg-9 col-xl-6">
-                                                    <select class="form-control choose" data-live-search="true" id="district" name="district_id">
-                                                        <option value="">Chọn Quận/huyện</option>
+                                                    <select class="form-control choose" data-live-search="true"
+                                                            id="district" name="district_id">
+                                                        @if($user->districts)
+                                                            <option value="{{ $user->districts->id }}">{{ $user->districts->name }}</option>
+                                                        @else
+                                                            <option value="">Chọn Quận/huyện</option>
+                                                        @endif
                                                     </select>
                                                 </div>
                                             </div>
@@ -123,7 +143,11 @@
                                                     {{--                                                    <input class="form-control" name="pschool_name" type="text" value=""--}}
                                                     {{--                                                           placeholder="Ví dụ: THPT Minh Khai">--}}
                                                     <select class="form-control" name="school_id" id="school">
-                                                        <option value="">Chọn Trường</option>
+                                                        @if($user->school)
+                                                            <option value="{{ $user->school->id }}">{{ $user->school->school_name }}</option>
+                                                        @else
+                                                            <option value="">Chọn Trường</option>
+                                                        @endif
                                                     </select>
                                                 </div>
                                             </div>
@@ -144,7 +168,7 @@
                                                 <label class="col-form-label">Năm tốt nghiệp THPT:</label>
                                                 <div class="col-lg-2 col-xl-2">
                                                     <input class="form-control" type="text" name="graduated_year"
-                                                           value="" placeholder="Ví dụ: 2020">
+                                                           value="{{ $user->graduated_year}}" placeholder="Ví dụ: 2020">
                                                 </div>
                                                 <label class="col-form-label">Xếp loại tốt nghiệp:</label>
                                                 <div class="col-lg-2 col-xl-2">
@@ -154,7 +178,7 @@
                                                 <label class="col-form-label">Điểm tốt nghiệp:</label>
                                                 <div class="col-lg-2 col-xl-2">
                                                     <input class="form-control" type="text" name="gpa"
-                                                           value="" placeholder="Ví dụ: 9.0">
+                                                           value="{{ $user->gpa}}" placeholder="Ví dụ: 9.0">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -163,22 +187,26 @@
                                             </div>
                                             <div class="kt-radio-inline">
                                                 <label class="kt-radio col-2">
-                                                    <input type="radio" name="english_level"
+                                                    <input type="radio"
+                                                           {{ $user->your_english_level == 1 ? "checked" : "" }} name="your_english_level"
                                                            value="1">Chưa biết
                                                     <span></span>
                                                 </label>
                                                 <label class="kt-radio col-2">
-                                                    <input type="radio" name="english_level"
+                                                    <input type="radio"
+                                                           {{ $user->your_english_level == 2 ? "checked" : "" }} name="your_english_level"
                                                            value="2">Cơ bản
                                                     <span></span>
                                                 </label>
                                                 <label class="kt-radio col-2">
-                                                    <input type="radio" name="english_level"
+                                                    <input type="radio"
+                                                           {{ $user->your_english_level == 3 ? "checked" : "" }} name="your_english_level"
                                                            value="3">Khá
                                                     <span></span>
                                                 </label>
                                                 <label class="kt-radio col-2">
-                                                    <input type="radio" name="english_level"
+                                                    <input type="radio"
+                                                           {{ $user->your_english_level == 4 ? "checked" : "" }} name="your_english_level"
                                                            value="4">Tốt
                                                     <span></span>
                                                 </label>
@@ -186,13 +214,14 @@
                                             <div class="form-group row">
                                                 <label class="col-form-label">Chứng chỉ tiếng Anh(nếu có):</label>
                                                 <div class="col-lg-2 col-xl-2">
-                                                    <input class="form-control" type="text" name=""
+                                                    <input class="form-control" type="text" name="ielts"
                                                            value="" placeholder="Ví dụ: IELTS">
                                                 </div>
                                                 <label class="col-form-label">Ngày thi:</label>
                                                 <div class="col-lg-2 col-xl-2">
-                                                    <input class="form-control" type="text" name="pgen_code_date"
-                                                           value="" placeholder="Ví dụ: 01/01/2020">
+                                                    <input class="form-control" type="date" name="pgen_code_date"
+                                                           value="{{ $user->pgen_code_date }}"
+                                                           placeholder="Ví dụ: 01/01/2020">
                                                 </div>
                                                 <label class="col-form-label">Kết quả:</label>
                                                 <div class="col-lg-2 col-xl-2">
@@ -204,19 +233,21 @@
                                                 <label class="col-form-label btn-label text-left">7. Số CCCD số:</label>
                                                 <div class="col-lg-2 col-xl-2">
                                                     <input class="form-control" type="text" name="cmt"
-                                                           value="" placeholder="Ví dụ: 001202015340">
+                                                           value="{{ $user->cmt }}" placeholder="Ví dụ: 001202015340">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-form-label">Ngày cấp:</label>
                                                 <div class="col-lg-2 col-xl-4">
                                                     <input class="form-control" type="date" name="cmt_provided_date"
-                                                           id="example-date-input" placeholder="Ví dụ: 01/01/2020">
+                                                           value="{{ $user->cmt_provided_date }}"
+                                                           placeholder="Ví dụ: 01/01/2020">
                                                 </div>
                                                 <label class="col-form-label">Nơi cấp:</label>
                                                 <div class="col-lg-2 col-xl-4">
                                                     <input class="form-control" type="text" name="cmt_provided_where"
-                                                           value="" placeholder="Ví dụ: Công An TP HÀ Nội">
+                                                           value="{{ $user->cmt_provided_where }}"
+                                                           placeholder="Ví dụ: Công An TP HÀ Nội">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -224,59 +255,64 @@
                                                     hệ:</label>
                                                 <div class="col-lg-2 col-xl-8">
                                                     <input class="form-control" type="text" name="paddress"
-                                                           value="" placeholder="Ví dụ: 80 Duy Tân - Cầu Giấy - Hà Nội">
+                                                           value="{{ $user->paddress }}"
+                                                           placeholder="Ví dụ: 80 Duy Tân - Cầu Giấy - Hà Nội">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-form-label btn-label text-left">9. Mobile:</label>
                                                 <div class="col-lg-2 col-xl-3">
                                                     <input class="form-control" type="text" name="ptelephone"
-                                                           value="" placeholder="">
+                                                           value="{{ $user->ptelephone }}" placeholder="">
                                                 </div>
                                                 <label class="col-form-label">Home Phone:</label>
                                                 <div class="col-lg-2 col-xl-4">
                                                     <input class="form-control" type="text" name="pphone"
-                                                           value="" placeholder="">
+                                                           value="{{ $user->pphone }}" placeholder="">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-form-label">Email:</label>
                                                 <div class="col-lg-2 col-xl-8">
                                                     <input class="form-control" type="text" name="pemail"
-                                                           value="" placeholder="Ví dụ: tamma1290@gmail.com">
+                                                           value="{{ $user->pemail }}"
+                                                           placeholder="Ví dụ: tamma1290@gmail.com">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-form-label btn-label text-left">10. Họ tên bố/mẹ/người
                                                     giám hộ:</label>
                                                 <div class="col-lg-2 col-xl-6">
-                                                    <input class="form-control" type="text" name=""
-                                                           value="" placeholder="">
+                                                    <input class="form-control" type="text" name="parent_name"
+                                                           value="{{ $user->parent_name }}" placeholder="">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-form-label">Nghề nghiệp:</label>
                                                 <div class="col-lg-2 col-xl-6">
-                                                    <input class="form-control" type="text" name=""
-                                                           value="" placeholder="">
+                                                    <input class="form-control" type="text" name="parent_job"
+                                                           value="{{ $user->parent_job }}"
+                                                           placeholder="Ví dụ: Giảng Viên">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-form-label">Nơi công tác:</label>
                                                 <div class="col-lg-2 col-xl-4">
-                                                    <input class="form-control" type="text" name=""
-                                                           value=""
+                                                    <input class="form-control" type="text" name="parent_address"
+                                                           value="{{ $user->parent_address}}"
                                                            placeholder="Ví dụ: Số 2 -Dương Khuê - Mai Dịch - Cầu Giấy - Hà Nội">
                                                 </div>
                                                 <label class="col-form-label">Email:</label>
                                                 <div class="col-lg-2 col-xl-2">
-                                                    <input class="form-control" type="text" name=""
-                                                           value="" placeholder="Ví dụ: thuyquynh123@gmail.com">
+                                                    <input class="form-control" type="text" name="email_mobile"
+                                                           value="{{ $user->email_mobile }}"
+                                                           placeholder="Ví dụ: thuyquynh123@gmail.com">
                                                 </div>
                                                 <label class="col-form-label">Mobile:</label>
                                                 <div class="col-lg-2 col-xl-2">
-                                                    <input class="form-control" type="text" name=""
-                                                           value="" placeholder="ví dụ: 0987566666">
+                                                    <input class="form-control" type="text" name="parent1_mobile"
+                                                           value="{{ $user->parent1_mobile }}"
+                                                           placeholder="ví dụ: 0987566666">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -376,7 +412,8 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-form-label btn-label text-left">13. Cam kết của thí sinh:</label>
+                                            <label class="col-form-label btn-label text-left">13. Cam kết của thí
+                                                sinh:</label>
                                         </div>
                                         <div class="kt-form__actions text-center">
                                             <div class="row">
@@ -418,7 +455,6 @@
                     method: 'POST',
                     data: {action: action, id: id, _token: _token},
                     success: function (data) {
-                        console.log(data);
                         $('#' + result).html(data);
                     }
                 });

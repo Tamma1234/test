@@ -13,6 +13,7 @@ class AuthController extends Controller
     {
         if (auth()->user() != "") {
             $user = auth()->user();
+
             return redirect()->route('profile.detail', ['hash' => $user->hash_id]);
         } else {
             return view('admin.home.index');
@@ -25,13 +26,13 @@ class AuthController extends Controller
             $user = auth()->user();
             return redirect()->route('profile.detail', ['hash' => $user->hash_id]);
         } else {
-            $email = $request->email;
-            $user = User::where('email', $email)->first();
+            $email = $request->pemail;
+            $user = User::where('pemail', $email)->first();
             if ($user) {
                 if ($user->is_active == 1) {
 
                     $credentials = $request->validate([
-                        'email' => ['required'],
+                        'pemail' => ['required'],
                         'password' => ['required'],
                     ]);
                     // Ghi nhớ đăng nhập

@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use function Symfony\Component\String\u;
 
 class UserController extends Controller
 {
@@ -26,11 +27,14 @@ class UserController extends Controller
     {
         $user = auth()->user();
         $brand = Brand::all();
-        $email = $user->email;
-        $people = People::where('pemail', $email)->first();
-        $date = $people->dob;
-        $time = strtotime($date);
-        $format = date("d/m/Y", $time);
+        $email = $user->pemail;
+        $people = User::where('pemail', $email)->first();
+//        if ($people) {
+//            $date = $people->dob;
+//            $time = strtotime($date);
+//            $format = date("d/m/Y", $time);
+//        }
+//        $format = "";
         $business = Branch::where('is_active', 2)->get();
         $media = Branch::where('is_active', 3)->get();
         $information = Branch::where('is_active', 1)->get();
@@ -38,12 +42,18 @@ class UserController extends Controller
 //        $qrCode = QrCode::generate('Welcome to Makitweb', public_path('images/qrcode.svg') );
 
         return view('admin.users.profile', compact('user', 'business', 'media',
-            'information', 'people', 'format', 'brand'));
+            'information', 'people', 'brand'));
     }
     public function updateProfile(Request $request) {
         $data = $request->all();
+        $cmt_date = $request->cmt_provided_date;
+        $cmt_int = strtotime($cmt_date);
+        $cmt_format_date = date("Y-m-d", $cmt_int);
         $id = $request->id;
-        $user = User::where('id', $id)->first();
+        $user = User::find($id);
+        $user->update([
+            'cmt_provided_date' => $cmt_format_date
+        ]);
         $user->update($data);
 
         return back()->with('success', 'Update Account successful');

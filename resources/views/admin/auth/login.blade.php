@@ -36,7 +36,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
-                            <input type="text" class="form-control" placeholder="email" name="user_email" autocomplete="on">
+                            <input type="text" class="form-control" placeholder="email" name="pemail" autocomplete="on">
                         </div>
                         @error('user_email')
                             <div class="alert alert-danger">{{ $message }}</div>

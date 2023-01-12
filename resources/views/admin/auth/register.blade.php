@@ -21,26 +21,34 @@
                                           enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group">
-                                            <label for="inputAddress">Full Name</label>
-                                            <input type="text" class="form-control" name="full_name"
+                                            <label for="inputAddress">First Name</label>
+                                            <input type="text" class="form-control" name="first_name"
                                                    placeholder="Full Name">
                                         </div>
-                                        @error('full_name')
+                                        @error('first_name')
+                                        <div class="alert alert-solid-danger alert-bold">{{ $message }}</div>
+                                        @enderror
+                                        <div class="form-group">
+                                            <label for="inputAddress">Last Name</label>
+                                            <input type="text" class="form-control" name="last_name"
+                                                   placeholder="Full Name">
+                                        </div>
+                                        @error('last_name')
                                         <div class="alert alert-solid-danger alert-bold">{{ $message }}</div>
                                         @enderror
                                         <div class="form-group">
                                             <label for="inputEmail4">Email</label>
-                                            <input type="email" class="form-control" name="email" placeholder="Email">
-                                            @error('email')
+                                            <input type="email" class="form-control" name="pemail" placeholder="Email">
+                                            @error('pemail')
                                             <div class="alert alert-solid-danger alert-bold">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="form-group">
                                             <label for="inputAddress">Phone Number</label>
-                                            <input type="text" class="form-control" name="phone_number"
+                                            <input type="text" class="form-control" name="ptelephone"
                                                    placeholder="Phone">
                                         </div>
-                                        @error('phone_number')
+                                        @error('ptelephone')
                                         <div class="alert alert-solid-danger alert-bold">{{ $message }}</div>
                                         @enderror
                                         <div class="d-flex justify-content-end pt-3">

@@ -71,7 +71,7 @@ class QuestionController extends Controller
             $studentAnswers = new StudentAnswer();
             foreach ($answers as $key => $item) {
                 $studentAnswers->insert([
-                    'user_id' => $user->email,
+                    'user_id' => $user->pemail,
                     'question_id' => $key,
                     'answers_id' => $item,
                     'content' => "",

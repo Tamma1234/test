@@ -133,7 +133,7 @@
          var totalEndSeconds = (+timeEndFormat[0]) * 60 * 60 + (+timeEndFormat[1]) * 60 + (+timeEndFormat[2]);
          var totalSeconds = totalEndSeconds - totalStartSeconds;
 
-         var thoiluong = 600 - totalSeconds;
+         var thoiluong = 3600 - totalSeconds;
          var mytime;
 
          function demnguoc() {

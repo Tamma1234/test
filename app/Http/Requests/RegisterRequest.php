@@ -24,18 +24,20 @@ class RegisterRequest extends FormRequest
     public function attributes()
     {
         return [
-            'full_name' => 'Full Name',
-            'email' => 'Email',
-            'phone_number' => 'Phone Number'
+            'first_name' => 'First Name',
+            'last_name' => 'Last Name',
+            'pemail' => 'Email',
+            'ptelephone' => 'Phone Number'
         ];
     }
 
     public function rules()
     {
         return [
-            'full_name' => 'required',
-            'email' => 'required|email:rfc,dns|unique:users,email',
-            'phone_number' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'pemail' => 'required|email:rfc,dns|unique:people,pemail',
+            'ptelephone' => 'required',
         ];
     }
 
@@ -43,7 +45,7 @@ class RegisterRequest extends FormRequest
     {
         return [
             'required'=> 'The :attributes field is required',
-            'email'=> 'The :attributes invalidate',
+            'pemail'=> 'The :attributes invalidate',
             'unique'=> 'The :attributes Already exist'
         ];
     }

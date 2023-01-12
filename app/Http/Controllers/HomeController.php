@@ -21,7 +21,14 @@ class HomeController extends Controller
 
     public function register()
     {
-        return view('admin.auth.register');
+        if (auth()->user() != "") {
+            $user = auth()->user();
+
+            return redirect()->route('profile.detail', ['hash' => $user->hash_id]);
+        } else {
+            return view('admin.auth.register');
+
+        }
     }
 
     public function alert()
@@ -32,15 +39,17 @@ class HomeController extends Controller
     public function postRegister(RegisterRequest $request)
     {
         $link = "http://127.0.0.1:8000";
-        $email = $request->email;
-        $full_name = $request->full_name;
-        $phone_number = $request->phone_number;
+        $email = $request->pemail;
+        $first_name = $request->first_name;
+        $last_name = $request->last_name;
+        $phone_number = $request->ptelephone;
         $password = "123@123a";
         $hashPassword = Hash::make($password);
-        $user = People::create([
-            'full_name' => $full_name,
-            'email' => $email,
-            'phone_number' => $request->phone_number,
+        $user = User::create([
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'pemail' => $email,
+            'ptelephone' => $request->phone_number,
             'password' => $hashPassword,
             'is_active' => 0
         ]);
@@ -55,18 +64,24 @@ class HomeController extends Controller
             'path' => $link
         ]);
 
-        Service::getSendMail()->sendPaymentMail($email, $full_name, $phone_number, $password);
+        Service::getSendMail()->sendPaymentMail($email, $first_name, $last_name, $phone_number, $password);
 
         return redirect()->route('home')->with('success', 'Please check your email to activate your registered account');
     }
 
     public function confirm(Request $request)
     {
-        $user = User::where('email', $request->email)->first();
-        $user->update([
-            'is_active' => 1
-        ]);
+        if (auth()->user() != "") {
+            $user = auth()->user();
+            return redirect()->route('profile.detail', ['hash' => $user->hash_id]);
+        } else {
+            $user = User::where('pemail', $request->email)->first();
+            $user->update([
+                'is_active' => 1
+            ]);
 
-        return view('admin.home.index');
+            return view('admin.home.index');
+        }
+
     }
 }

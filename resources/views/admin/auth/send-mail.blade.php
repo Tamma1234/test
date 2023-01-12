@@ -7,7 +7,7 @@
             <div id=":fr" class="a3s aiL msg-8525905254478487520"><u></u>
                 <div>
                     <h3>
-                        Xin chào {{ $full_name }}
+                        Xin chào {{ $first_name .' '. $last_name }}
                     </h3>
                     <p>Em đã đăng ký tài khoản dự thi trên Swinburne, giờ em hãy ấn confirm để kích hoạt tài khoản nhé!</p>
                     <p>Thông tin tài khoản:</p>
@@ -15,8 +15,12 @@
                         <table border="1" style="width:50%;margin-left:200px">
                             <tbody>
                             <tr>
-                                <th>Full Name</th>
-                                <td>{{$full_name}}</td>
+                                <th>First Name</th>
+                                <td>{{$first_name}}</td>
+                            </tr>
+                            <tr>
+                                <th>Last Name</th>
+                                <td>{{$last_name}}</td>
                             </tr>
                             <tr>
                                 <th>Email </th>

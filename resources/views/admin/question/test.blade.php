@@ -6,7 +6,6 @@
         <!--begin: Form Wizard Nav -->
         <div class="kt-wizard-v4__nav">
             <div class="kt-wizard-v4__nav-items kt-wizard-v4__nav-items--clickable">
-
                 <!--doc: Replace A tag with SPAN tag to disable the step link click -->
                 <div class="kt-wizard-v4__nav-item" data-ktwizard-type="step" data-ktwizard-state="current">
                     <div class="kt-wizard-v4__nav-body">
@@ -21,7 +20,6 @@
                 </div>
             </div>
         </div>
-
         <!--end: Form Wizard Nav -->
         <div class="kt-portlet">
             <div class="kt-portlet__body kt-portlet__body--fit">
