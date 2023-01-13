@@ -38,70 +38,68 @@
         <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
             <div class="kt-grid kt-grid--desktop kt-grid--ver kt-grid--ver-desktop kt-app">
                 <div class="kt-grid__item kt-app__toggle kt-app__aside" id="kt_user_profile_aside">
-
                     <!--begin:: Widgets/Notifications-->
                     <div class="kt-portlet kt-portlet--height-fluid">
                         <div class="kt-portlet__head">
                             <div class="kt-portlet__head-toolbar">
                                 <ul class="nav nav-pills nav-pills-sm nav-pills-label nav-pills-bold" role="tablist">
-
                                     @foreach($question_type as $item)
                                         <li class="nav-item" style="margin-top: 15px">
-                                            <a class="nav-link {{ $item->id == 1 ? "active" : "" }}" data-toggle="tab" href="#kt_widget6_tab{{ $item->id }}_content"
+                                            <a class="nav-link {{ $item->id == 1 ? "active" : "" }}" onclick="chooseQuestion({{ $item->id }})" id="{{ $item->id }}" data-toggle="tab" href="#kt_widget6_tab{{ $item->id }}_content"
                                                role="tab">
                                                Phần {{ $item->id }}
                                             </a>
                                         </li>
                                     @endforeach
-
                                 </ul>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div class="kt-grid__item kt-grid__item--fluid kt-app__content">
                     <div class="col-lg-12 tab-content">
                         <!--begin::Portlet-->
-                        <form class="kt-form kt-form--label-right" action="{{ route('post.question') }}" id="myForm"
+                        <form class="kt-form kt-form--label-right" action="{{ route('post.question') }}"
                               method="post">
                             @csrf
-                            @foreach($question_type as $item)
-                                    <?php $questions = \App\Models\Questions::where('question_type', $item->id)->where('parent_id', 0)->get();
-                                    ?>
-                                <div class="kt-portlet tab-pane {{ $item->id == 1 ? "active" :"" }}" id="kt_widget6_tab{{ $item->id }}_content">
-                                    <div class="kt-portlet__head">
-                                        <div class="kt-portlet__head-label">
-                                            <h3 class="kt-portlet__head-title" style="color: #6a5bf1; font-weight: 600">
-                                                {{ $item->name }}
-                                            </h3>
-                                        </div>
-                                    </div>
-                                    <input type="hidden" value="{{ $user->time_exam }}" name="time_exam"
-                                           id="time_start">
-                                    <div class="kt-portlet__body" id="question">
-                                        @foreach($questions as $question)
-                                            <div class="kt-section kt-section--first">
-                                                <h3 class="kt-section__title"
-                                                    id="{{ $question->id }}">{{ $question->question_content }}</h3>
-                                                <div class="kt-radio-list">
-                                                    @foreach($question->answers as $answer)
-                                                        <label class="kt-radio">
-                                                            <input id="{{ $answer->id }}"
-                                                                   onclick="chooseAnswers({{$answer->id}})"
-                                                                   type="radio"
-                                                                   name="answers[ {{ $question->id }} ]"
-                                                                   value="{{ $answer->id }}"> {{ $answer->question_content }}
-                                                            <span></span>
-                                                        </label>
-                                                    @endforeach
-                                                </div>
+                            <div id="myForm">
+                                @foreach($question_type as $item)
+                                        <?php $questions = \App\Models\Questions::where('question_type', $item->id)->where('parent_id', 0)->get();
+                                        ?>
+                                    <div class="kt-portlet tab-pane {{ $item->id == 1 ? "active" :"" }}" id="kt_widget6_tab{{ $item->id }}_content">
+                                        <div class="kt-portlet__head">
+                                            <div class="kt-portlet__head-label">
+                                                <h3 class="kt-portlet__head-title" style="color: #6a5bf1; font-weight: 600">
+                                                    {{ $item->name }}
+                                                </h3>
                                             </div>
-                                        @endforeach
+                                        </div>
+                                        <input type="hidden" value="{{ $user->time_exam }}" name="time_exam"
+                                               id="time_start">
+                                        <div class="kt-portlet__body" id="question">
+                                            @foreach($questions as $question)
+                                                <div class="kt-section kt-section--first">
+                                                    <h3 class="kt-section__title"
+                                                        id="{{ $question->id }}">{{ $question->question_content }}</h3>
+                                                    <div class="kt-radio-list">
+                                                        @foreach($question->answers as $answer)
+                                                            <label class="kt-radio">
+                                                                <input id="{{ $answer->id }}"
+                                                                       onclick="chooseAnswers({{$answer->id}})"
+                                                                       type="radio"
+                                                                       name="answers[ {{ $question->id }} ]"
+                                                                       value="{{ $answer->id }}"> {{ $answer->question_content }}
+                                                                <span></span>
+                                                            </label>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                        <!--end::Form-->
                                     </div>
-                                    <!--end::Form-->
-                                </div>
-                            @endforeach
+                                @endforeach
+                            </div>
                             <div class="kt-portlet__foot" style="margin-bottom: 20px">
                                 <div class="kt-form__actions">
                                     <div class="row">
@@ -121,12 +119,10 @@
             </div>
         </div>
     </div>
-
 @endsection
 @section('script')
     <script>
         let questions;
-
         function chooseAnswers(id) {
             var question = $('#question div.kt-section');
             var arr = [];
@@ -140,11 +136,35 @@
             });
 
             $('#totalQuestion').html(result.length);
-
-            // console.log(arr);
-            // const result = arr.filter((value, index) => {
-            //     console.log(value.length);
-            // })
         }
+        function chooseQuestion(id) {
+            $.ajax({
+                url: "{{ route('list.answer') }}/" + id,
+                method: 'GET',
+                data: {id:id},
+                success: function (data) {
+                    $('#myForm').html(data);
+                }
+            });
+        }
+        $(document).ready(function () {
+            let li = $('.nav-item');
+            li.each( function (k, v) {
+                let active = $(v).find('a').attr('class');
+                if (active == "nav-link active") {
+                   var active_id = $(v).find('a').attr('id');
+                    $.ajax({
+                        url: "{{ route('list.answer') }}/" + active_id,
+                        method: 'GET',
+                        data: {active_id:active_id},
+                        success: function (data) {
+                            $('#myForm').html(data);
+                        }
+                    });
+                }
+
+            })
+        })
+
     </script>
 @endsection

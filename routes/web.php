@@ -71,6 +71,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/test', 'QuestionController@test')->name('question.test');
         Route::get('/total', 'QuestionController@totalQuestion')->name('question.total');
         Route::get('/get-answer', 'QuestionController@getAnswer')->name('question.answer');
+        Route::get('/list-answer/{id?}', 'QuestionController@listAnswer')->name('list.answer');
         Route::get('/start-test', 'QuestionController@startTest')->name('question.start');
         Route::get('/detail/{type}', 'QuestionController@detail')->name('question.detail');
         Route::post('/post-question', 'QuestionController@postQuestion')->name('post.question');

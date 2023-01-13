@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Answers;
 use App\Models\Question;
 use App\Models\Questions;
 use App\Models\QuestionType;
@@ -114,5 +115,40 @@ class QuestionController extends Controller
         $arrQuestion = array_diff($question, $arr);
         $totalArrQuestion = count($arrQuestion);
         dd($totalArrQuestion);
+    }
+
+    public function listAnswer(Request $request)
+    {
+        $id = $request->id;
+        $user = auth()->user();
+        $questiontype = QuestionType::find($id);
+        $questions = Questions::where('question_type', $questiontype->id)
+                    ->where('parent_id', 0)->get();
+        $output = "";
+
+        $output .= '<div class="kt-portlet">';
+            $output .= '<div class="kt-portlet__head">';
+                $output .= '<div class="kt-portlet__head-label">';
+                $output .= '<h3 class="kt-portlet__head-title" style="color: #6a5bf1; font-weight: 600">' . $questiontype->name . '</h3>';
+                $output .= '</div>';
+            $output .= '</div>';
+            $output .= '<input type="hidden" value="'.$user->time_exam.'" name="time_exam" id="time_start" >';
+            $output .= '<div class="kt-portlet__body" id="question">';
+                foreach ($questions as $question) {
+                    $output .= ' <div class="kt-section kt-section--first">';
+                        $output .= '<h3 class="kt-section__title" id="' . $question->id . '">' . $question->question_content . '</h3>';
+                        $output .= '<div class="kt-radio-list">';
+                        foreach ($question->answers as $answer) {
+                            $output .= '<label class="kt-radio">';
+                            $output .= '<input id="' . $answer->id . '" onclick="chooseAnswers(' . $answer->id . ')" type="radio" name="answers[ ' . $question->id . ' ]" value="' . $answer->id . '"> ' . $answer->question_content . ' <span></span>';
+                            $output .= '</label>';
+                        }
+                        $output .= '</div>';
+                    $output .= '</div>';
+                }
+            $output .= '</div>';
+        $output .= '</div>';
+
+       return $output;
     }
 }
