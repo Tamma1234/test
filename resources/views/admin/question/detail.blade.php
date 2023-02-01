@@ -54,7 +54,6 @@
 {{--                                </div>--}}
                             </div>
                         </div>
-
                         <!--end: Form Wizard Nav -->
                     </div>
                     <div class="kt-portlet">
@@ -100,10 +99,8 @@
                                 </div>
                             </div>
                         </form>
-
                         <!--end::Form-->
                     </div>
-
                 </div>
             </div>
         </div>

@@ -17,7 +17,8 @@ class QuestionController extends Controller
     public function index()
     {
         $question_type = QuestionType::all();
-        return view('admin.question.index', compact('question_type'));
+        $user = auth()->user();
+        return view('admin.question.index', compact('question_type', 'user'));
     }
 
     public function detail(Request $request)
@@ -40,6 +41,7 @@ class QuestionController extends Controller
     public function startTest()
     {
         $user = auth()->user();
+        $studentUser = StudentAnswer::where('user_name', $user->pemail)->orderBy('time_submit', 'DESC')->get();
         $question_type = QuestionType::all();
         $question = Questions::where('parent_id', 0)
             ->pluck('id')
@@ -53,7 +55,7 @@ class QuestionController extends Controller
             ]);
         }
 
-        return view('admin.question.start-test', compact('question_type', 'time', 'totalQuestion', 'user'));
+        return view('admin.question.start-test', compact('question_type', 'time', 'totalQuestion', 'user', 'studentUser'));
     }
 
     public function postQuestion(Request $request)
@@ -123,32 +125,51 @@ class QuestionController extends Controller
         $user = auth()->user();
         $questiontype = QuestionType::find($id);
         $questions = Questions::where('question_type', $questiontype->id)
-                    ->where('parent_id', 0)->get();
+            ->where('parent_id', 0)->get();
         $output = "";
 
-        $output .= '<div class="kt-portlet">';
+            $output .= '<div class="kt-portlet">';
             $output .= '<div class="kt-portlet__head">';
-                $output .= '<div class="kt-portlet__head-label">';
-                $output .= '<h3 class="kt-portlet__head-title" style="color: #6a5bf1; font-weight: 600">' . $questiontype->name . '</h3>';
-                $output .= '</div>';
+            $output .= '<div class="kt-portlet__head-label">';
+            $output .= '<h3 class="kt-portlet__head-title" style="color: #6a5bf1; font-weight: 600">' . $questiontype->name . '</h3>';
             $output .= '</div>';
-            $output .= '<input type="hidden" value="'.$user->time_exam.'" name="time_exam" id="time_start" >';
+            $output .= '</div>';
+            $output .= '<input type="hidden" value="' . $user->time_exam . '" name="time_exam" id="time_start" >';
             $output .= '<div class="kt-portlet__body" id="question">';
-                foreach ($questions as $question) {
-                    $output .= ' <div class="kt-section kt-section--first">';
-                        $output .= '<h3 class="kt-section__title" id="' . $question->id . '">' . $question->question_content . '</h3>';
-                        $output .= '<div class="kt-radio-list">';
-                        foreach ($question->answers as $answer) {
-                            $output .= '<label class="kt-radio">';
-                            $output .= '<input id="' . $answer->id . '" onclick="chooseAnswers(' . $answer->id . ')" type="radio" name="answers[ ' . $question->id . ' ]" value="' . $answer->id . '"> ' . $answer->question_content . ' <span></span>';
-                            $output .= '</label>';
-                        }
-                        $output .= '</div>';
-                    $output .= '</div>';
+            foreach ($questions as $question) {
+                $output .= ' <div class="kt-section kt-section--first">';
+                $output .= '<h3 class="kt-section__title" id="' . $question->id . '">' . $question->question_content . '</h3>';
+                $output .= '<div class="kt-radio-list">';
+                foreach ($question->answers as $answer) {
+                    $output .= '<label class="kt-radio">';
+                    $output .= '<input data-id="' . $question->id . '" onclick="chooseAnswers(' . $answer->id . ')" type="radio" name="answers[ ' . $question->id . ' ]" value="' . $answer->id . '"> ' . $answer->question_content . ' <span></span>';
+                    $output .= '</label>';
                 }
+                $output .= '</div>';
+                $output .= '</div>';
+            }
             $output .= '</div>';
-        $output .= '</div>';
+            $output .= '</div>';
 
-       return $output;
+
+        return $output;
+    }
+
+    public function postAnswer(Request $request)
+    {
+        $id = $request->id;
+        $question_id = $request->question_id;
+        $time = Carbon::now();
+        $dateTime = $time->toDateTimeString();
+        $user = auth()->user();
+        $studentAnswers = new StudentAnswer();
+        $studentAnswers->insert([
+            'user_name' => $user->pemail,
+            'question_id' => $question_id,
+            'answers_id' => $id,
+            'content' => "",
+            'time_submit' => $dateTime,
+            'dot_thi' => 0
+        ]);
     }
 }

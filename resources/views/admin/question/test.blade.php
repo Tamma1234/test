@@ -36,26 +36,26 @@
                                     <div class="kt-wizard-v4__form">
                                         <div class="form-group">
                                             <label>Full Name</label>
-                                            <input type="text" disabled class="form-control" name="full_name" placeholder="First Name" value="{{ $user->full_name }}">
+                                            <input type="text" disabled class="form-control" name="full_name" placeholder="First Name" value="{{ $user->first_name .' '. $user->last_name }}">
                                             <span class="form-text text-muted">Please enter your full name.</span>
                                         </div>
                                         <div class="form-group">
                                             <label>Email</label>
-                                            <input type="text" disabled class="form-control" name="lname" placeholder="Last Name" value="{{ $user->email }}">
+                                            <input type="text" disabled class="form-control" name="lname" placeholder="Last Name" value="{{ $user->pemail }}">
                                             <span class="form-text text-muted">Please enter your email.</span>
                                         </div>
                                         <div class="row">
                                             <div class="col-xl-6">
                                                 <div class="form-group">
                                                     <label>Phone</label>
-                                                    <input type="tel" disabled class="form-control" name="phone_number" placeholder="phone" value="{{ $user->phone_number }}">
+                                                    <input type="tel" disabled class="form-control" name="phone_number" placeholder="phone" value="{{ $user->ptelephone }}">
                                                     <span class="form-text text-muted">Please enter your phone number.</span>
                                                 </div>
                                             </div>
                                             <div class="col-xl-6">
                                                 <div class="form-group">
                                                     <label>Address</label>
-                                                    <input type="address" disabled class="form-control" name="address" placeholder="Email" value="{{ $user->address }}">
+                                                    <input type="address" disabled class="form-control" name="address" placeholder="Email" value="{{ $user->paddress }}">
                                                     <span class="form-text text-muted">Please enter your email address.</span>
                                                 </div>
                                             </div>
